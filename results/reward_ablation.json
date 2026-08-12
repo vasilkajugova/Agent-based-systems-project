@@ -1,0 +1,286 @@
+{
+  "collision_weight_ablation": {
+    "-5": {
+      "per_seed": [
+        {
+          "mean_reward": 5.253915021849826,
+          "std_reward": 2.83260772801534,
+          "collision_rate": 0.6625,
+          "arrival_rate": 0.4041666666666666
+        },
+        {
+          "mean_reward": 5.4262373133610975,
+          "std_reward": 2.8572602832943566,
+          "collision_rate": 0.6,
+          "arrival_rate": 0.3083333333333333
+        },
+        {
+          "mean_reward": 5.904222816337714,
+          "std_reward": 3.1059471379662096,
+          "collision_rate": 0.575,
+          "arrival_rate": 0.4708333333333333
+        }
+      ],
+      "aggregate": {
+        "mean_reward": {
+          "mean": 5.528125050516213,
+          "ci95": 0.3112924439682971
+        },
+        "std_reward": {
+          "mean": 2.931938383091969,
+          "ci95": 0.13970100707816333
+        },
+        "collision_rate": {
+          "mean": 0.6124999999999999,
+          "ci95": 0.04164199269434109
+        },
+        "arrival_rate": {
+          "mean": 0.3944444444444444,
+          "ci95": 0.07547317131588792
+        }
+      }
+    },
+    "-10": {
+      "per_seed": [
+        {
+          "mean_reward": 4.731870064520939,
+          "std_reward": 4.079379985394341,
+          "collision_rate": 0.625,
+          "arrival_rate": 0.4083333333333334
+        },
+        {
+          "mean_reward": 4.800312958248568,
+          "std_reward": 4.152860764496612,
+          "collision_rate": 0.5625,
+          "arrival_rate": 0.4708333333333333
+        },
+        {
+          "mean_reward": 4.791339752961166,
+          "std_reward": 4.250069347884804,
+          "collision_rate": 0.65,
+          "arrival_rate": 0.4875
+        }
+      ],
+      "aggregate": {
+        "mean_reward": {
+          "mean": 4.774507591910225,
+          "ci95": 0.03436804915115135
+        },
+        "std_reward": {
+          "mean": 4.160770032591919,
+          "ci95": 0.07910802167881574
+        },
+        "collision_rate": {
+          "mean": 0.6124999999999999,
+          "ci95": 0.04164199269434109
+        },
+        "arrival_rate": {
+          "mean": 0.45555555555555555,
+          "ci95": 0.038562145877144904
+        }
+      }
+    },
+    "-15": {
+      "per_seed": [
+        {
+          "mean_reward": 3.5741586981531044,
+          "std_reward": 5.335921945182337,
+          "collision_rate": 0.5875,
+          "arrival_rate": 0.4208333333333333
+        },
+        {
+          "mean_reward": 3.0453052434381815,
+          "std_reward": 5.190603793885674,
+          "collision_rate": 0.5875,
+          "arrival_rate": 0.325
+        },
+        {
+          "mean_reward": 4.677241877397423,
+          "std_reward": 3.9476794171296663,
+          "collision_rate": 0.525,
+          "arrival_rate": 0.2708333333333333
+        }
+      ],
+      "aggregate": {
+        "mean_reward": {
+          "mean": 3.7655686063295697,
+          "ci95": 0.7693163589740533
+        },
+        "std_reward": {
+          "mean": 4.8247350520658925,
+          "ci95": 0.7049943670775672
+        },
+        "collision_rate": {
+          "mean": 0.5666666666666668,
+          "ci95": 0.03334027705454881
+        },
+        "arrival_rate": {
+          "mean": 0.33888888888888885,
+          "ci95": 0.07018196513672635
+        }
+      }
+    },
+    "-25": {
+      "per_seed": [
+        {
+          "mean_reward": -0.03305323121394255,
+          "std_reward": 7.9411250187711575,
+          "collision_rate": 0.6625,
+          "arrival_rate": 0.3625
+        },
+        {
+          "mean_reward": 1.7156594735224868,
+          "std_reward": 7.508232519223255,
+          "collision_rate": 0.6125,
+          "arrival_rate": 0.4125
+        },
+        {
+          "mean_reward": 2.4623155520742146,
+          "std_reward": 6.464559753802995,
+          "collision_rate": 0.5625,
+          "arrival_rate": 0.3416666666666667
+        }
+      ],
+      "aggregate": {
+        "mean_reward": {
+          "mean": 1.3816405981275863,
+          "ci95": 1.1833786820199994
+        },
+        "std_reward": {
+          "mean": 7.304639097265802,
+          "ci95": 0.7013215828213724
+        },
+        "collision_rate": {
+          "mean": 0.6124999999999999,
+          "ci95": 0.046197643037521094
+        },
+        "arrival_rate": {
+          "mean": 0.37222222222222223,
+          "ci95": 0.03363532950554374
+        }
+      }
+    }
+  },
+  "courtesy_weight_ablation": {
+    "0.0": {
+      "per_seed": [
+        {
+          "mean_reward": 5.966278220890612,
+          "std_reward": 3.0763417847051153,
+          "collision_rate": 0.5875,
+          "arrival_rate": 0.4833333333333333
+        },
+        {
+          "mean_reward": 4.680523727580065,
+          "std_reward": 2.204059653416236,
+          "collision_rate": 0.4625,
+          "arrival_rate": 0.17916666666666664
+        },
+        {
+          "mean_reward": 5.114238923128509,
+          "std_reward": 2.819817830464884,
+          "collision_rate": 0.5875,
+          "arrival_rate": 0.35
+        }
+      ],
+      "aggregate": {
+        "mean_reward": {
+          "mean": 5.253680290533063,
+          "ci95": 0.6043768229146834
+        },
+        "std_reward": {
+          "mean": 2.7000730895287455,
+          "ci95": 0.41420831621599524
+        },
+        "collision_rate": {
+          "mean": 0.5458333333333334,
+          "ci95": 0.06668055410909762
+        },
+        "arrival_rate": {
+          "mean": 0.3374999999999999,
+          "ci95": 0.14087335613641
+        }
+      }
+    },
+    "1.0": {
+      "per_seed": [
+        {
+          "mean_reward": 5.4166795360584885,
+          "std_reward": 3.4176730909910185,
+          "collision_rate": 0.6125,
+          "arrival_rate": 0.475
+        },
+        {
+          "mean_reward": 5.295318269544088,
+          "std_reward": 2.933117575669138,
+          "collision_rate": 0.5625,
+          "arrival_rate": 0.3583333333333333
+        },
+        {
+          "mean_reward": 5.129328101327337,
+          "std_reward": 3.3426926627173392,
+          "collision_rate": 0.6375,
+          "arrival_rate": 0.4875
+        }
+      ],
+      "aggregate": {
+        "mean_reward": {
+          "mean": 5.280441968976638,
+          "ci95": 0.13328220978381755
+        },
+        "std_reward": {
+          "mean": 3.231161109792499,
+          "ci95": 0.24098698799043927
+        },
+        "collision_rate": {
+          "mean": 0.6041666666666666,
+          "ci95": 0.03528403269133167
+        },
+        "arrival_rate": {
+          "mean": 0.44027777777777777,
+          "ci95": 0.06582301059872481
+        }
+      }
+    },
+    "3.0": {
+      "per_seed": [
+        {
+          "mean_reward": 4.928881511325937,
+          "std_reward": 3.1089695240821174,
+          "collision_rate": 0.575,
+          "arrival_rate": 0.4666666666666666
+        },
+        {
+          "mean_reward": 4.322807760083668,
+          "std_reward": 2.2968183305822554,
+          "collision_rate": 0.525,
+          "arrival_rate": 0.24166666666666664
+        },
+        {
+          "mean_reward": 4.719183336726072,
+          "std_reward": 2.8316832549138167,
+          "collision_rate": 0.55,
+          "arrival_rate": 0.35416666666666663
+        }
+      ],
+      "aggregate": {
+        "mean_reward": {
+          "mean": 4.656957536045225,
+          "ci95": 0.28438450405621823
+        },
+        "std_reward": {
+          "mean": 2.74582370319273,
+          "ci95": 0.3814328614490181
+        },
+        "collision_rate": {
+          "mean": 0.55,
+          "ci95": 0.023098821518760526
+        },
+        "arrival_rate": {
+          "mean": 0.3541666666666667,
+          "ci95": 0.10394469683442248
+        }
+      }
+    }
+  }
+}

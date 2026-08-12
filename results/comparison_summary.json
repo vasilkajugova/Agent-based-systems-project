@@ -1,0 +1,231 @@
+{
+  "per_seed": {
+    "heuristic": [
+      {
+        "method": "heuristic",
+        "episodes": 150,
+        "mean_reward": 4.688559988241122,
+        "std_reward": 3.199657045450925,
+        "ci95_reward": 0.5120517713993901,
+        "collision_rate": 0.6466666666666666,
+        "arrival_rate": 0.3422222222222222,
+        "avg_steps": 9.193333333333333,
+        "seed": 0
+      },
+      {
+        "method": "heuristic",
+        "episodes": 150,
+        "mean_reward": 4.688559988241122,
+        "std_reward": 3.199657045450925,
+        "ci95_reward": 0.5120517713993901,
+        "collision_rate": 0.6466666666666666,
+        "arrival_rate": 0.3422222222222222,
+        "avg_steps": 9.193333333333333,
+        "seed": 1
+      },
+      {
+        "method": "heuristic",
+        "episodes": 150,
+        "mean_reward": 4.7422905979545265,
+        "std_reward": 3.2049317994060913,
+        "ci95_reward": 0.5128959078390372,
+        "collision_rate": 0.64,
+        "arrival_rate": 0.34888888888888886,
+        "avg_steps": 9.226666666666667,
+        "seed": 2
+      },
+      {
+        "method": "heuristic",
+        "episodes": 150,
+        "mean_reward": 4.696573259623054,
+        "std_reward": 3.209074888656519,
+        "ci95_reward": 0.5135589402076979,
+        "collision_rate": 0.6466666666666666,
+        "arrival_rate": 0.3422222222222222,
+        "avg_steps": 9.18,
+        "seed": 3
+      },
+      {
+        "method": "heuristic",
+        "episodes": 150,
+        "mean_reward": 4.647684370734164,
+        "std_reward": 3.2040760173810865,
+        "ci95_reward": 0.5127589541919397,
+        "collision_rate": 0.6533333333333333,
+        "arrival_rate": 0.3422222222222222,
+        "avg_steps": 9.08,
+        "seed": 4
+      }
+    ],
+    "iql": [
+      {
+        "method": "iql",
+        "episodes": 150,
+        "mean_reward": 5.5366400759533185,
+        "std_reward": 3.6050775595105478,
+        "ci95_reward": 0.5769325662586481,
+        "collision_rate": 0.6533333333333333,
+        "arrival_rate": 0.44,
+        "avg_steps": 7.8933333333333335,
+        "seed": 0
+      },
+      {
+        "method": "iql",
+        "episodes": 150,
+        "mean_reward": 5.845850978754514,
+        "std_reward": 3.6486460584163294,
+        "ci95_reward": 0.583904978215622,
+        "collision_rate": 0.5666666666666667,
+        "arrival_rate": 0.4977777777777778,
+        "avg_steps": 8.253333333333334,
+        "seed": 1
+      },
+      {
+        "method": "iql",
+        "episodes": 150,
+        "mean_reward": 6.015877898043489,
+        "std_reward": 3.4336439652153827,
+        "ci95_reward": 0.54949747731341,
+        "collision_rate": 0.6266666666666667,
+        "arrival_rate": 0.48,
+        "avg_steps": 8.446666666666667,
+        "seed": 2
+      },
+      {
+        "method": "iql",
+        "episodes": 150,
+        "mean_reward": 6.159740311059138,
+        "std_reward": 3.6171207403956678,
+        "ci95_reward": 0.5788598765978222,
+        "collision_rate": 0.54,
+        "arrival_rate": 0.5266666666666667,
+        "avg_steps": 8.173333333333334,
+        "seed": 3
+      },
+      {
+        "method": "iql",
+        "episodes": 150,
+        "mean_reward": 5.739101717337624,
+        "std_reward": 3.5566096682456307,
+        "ci95_reward": 0.5691760882281421,
+        "collision_rate": 0.62,
+        "arrival_rate": 0.4688888888888889,
+        "avg_steps": 8.513333333333334,
+        "seed": 4
+      }
+    ],
+    "vdn": [
+      {
+        "method": "vdn",
+        "episodes": 150,
+        "mean_reward": 5.994186467369288,
+        "std_reward": 3.259714169980138,
+        "ci95_reward": 0.5216629130197269,
+        "collision_rate": 0.5133333333333333,
+        "arrival_rate": 0.47555555555555556,
+        "avg_steps": 10.513333333333334,
+        "seed": 0
+      },
+      {
+        "method": "vdn",
+        "episodes": 150,
+        "mean_reward": 5.806895903314387,
+        "std_reward": 2.952491061636396,
+        "ci95_reward": 0.47249697598097473,
+        "collision_rate": 0.5533333333333333,
+        "arrival_rate": 0.3933333333333333,
+        "avg_steps": 11.193333333333333,
+        "seed": 1
+      },
+      {
+        "method": "vdn",
+        "episodes": 150,
+        "mean_reward": 5.341340971569838,
+        "std_reward": 3.3271692138528195,
+        "ci95_reward": 0.5324579683066482,
+        "collision_rate": 0.5466666666666666,
+        "arrival_rate": 0.35555555555555557,
+        "avg_steps": 11.66,
+        "seed": 2
+      },
+      {
+        "method": "vdn",
+        "episodes": 150,
+        "mean_reward": 6.212310635946332,
+        "std_reward": 2.8423333880532673,
+        "ci95_reward": 0.4548680766676336,
+        "collision_rate": 0.47333333333333333,
+        "arrival_rate": 0.42444444444444446,
+        "avg_steps": 11.933333333333334,
+        "seed": 3
+      },
+      {
+        "method": "vdn",
+        "episodes": 150,
+        "mean_reward": 5.831880924186456,
+        "std_reward": 3.236080606604809,
+        "ci95_reward": 0.5178807551762722,
+        "collision_rate": 0.5133333333333333,
+        "arrival_rate": 0.4155555555555555,
+        "avg_steps": 10.96,
+        "seed": 4
+      }
+    ]
+  },
+  "aggregate": {
+    "heuristic": {
+      "reward": {
+        "mean": 4.692733640958798,
+        "ci95": 0.02639796270204781
+      },
+      "collision_rate": {
+        "mean": 0.6466666666666666,
+        "ci95": 0.0036958114430016816
+      },
+      "arrival_rate": {
+        "mean": 0.3435555555555555,
+        "ci95": 0.0023374363924797753
+      },
+      "avg_steps": {
+        "mean": 9.174666666666667,
+        "ci95": 0.043635624182286815
+      }
+    },
+    "iql": {
+      "reward": {
+        "mean": 5.859442196229617,
+        "ci95": 0.18942924847837422
+      },
+      "collision_rate": {
+        "mean": 0.6013333333333334,
+        "ci95": 0.036474494711297156
+      },
+      "arrival_rate": {
+        "mean": 0.4826666666666667,
+        "ci95": 0.025349183657442823
+      },
+      "avg_steps": {
+        "mean": 8.256,
+        "ci95": 0.19241659397140248
+      }
+    },
+    "vdn": {
+      "reward": {
+        "mean": 5.83732298047726,
+        "ci95": 0.2516675021583735
+      },
+      "collision_rate": {
+        "mean": 0.5199999999999999,
+        "ci95": 0.02506621276184781
+      },
+      "arrival_rate": {
+        "mean": 0.41288888888888886,
+        "ci95": 0.034481038281752106
+      },
+      "avg_steps": {
+        "mean": 11.251999999999999,
+        "ci95": 0.44089342119534203
+      }
+    }
+  }
+}
