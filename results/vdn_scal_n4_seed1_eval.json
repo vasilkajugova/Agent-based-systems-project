@@ -1,574 +1,575 @@
 {
   "summary": {
     "method": "vdn",
+    "obs_mode": "kinematics",
     "episodes": 80,
-    "mean_reward": 4.58370907355164,
-    "std_reward": 2.674588158618946,
-    "ci95_reward": 0.5860949715798194,
-    "collision_rate": 0.5875,
-    "arrival_rate": 0.221875,
-    "avg_steps": 13.4125
+    "mean_reward": 4.335886684305298,
+    "std_reward": 2.3905195795185934,
+    "ci95_reward": 0.5238456995720833,
+    "collision_rate": 0.75,
+    "arrival_rate": 0.21875,
+    "avg_steps": 11.475
   },
   "episodes": [
     {
       "episode": 0,
-      "mean_reward": 6.5442278997685595,
+      "mean_reward": 4.865406197085141,
       "collided": true,
-      "arrivals": 3,
-      "steps": 11
+      "arrivals": 1,
+      "steps": 18
     },
     {
       "episode": 1,
-      "mean_reward": 4.386887122397807,
-      "collided": false,
+      "mean_reward": 1.75,
+      "collided": true,
       "arrivals": 0,
-      "steps": 20
+      "steps": 5
     },
     {
       "episode": 2,
-      "mean_reward": 5.406682581786912,
+      "mean_reward": 3.5,
       "collided": true,
       "arrivals": 0,
-      "steps": 20
+      "steps": 8
     },
     {
       "episode": 3,
-      "mean_reward": 8.675500875946224,
+      "mean_reward": 2.5611842238401232,
+      "collided": true,
+      "arrivals": 1,
+      "steps": 8
+    },
+    {
+      "episode": 4,
+      "mean_reward": 6.75,
+      "collided": true,
+      "arrivals": 2,
+      "steps": 10
+    },
+    {
+      "episode": 5,
+      "mean_reward": 1.75,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
+    },
+    {
+      "episode": 6,
+      "mean_reward": 8.92550080921881,
+      "collided": false,
+      "arrivals": 2,
+      "steps": 20
+    },
+    {
+      "episode": 7,
+      "mean_reward": 1.6703201534325816,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 7
+    },
+    {
+      "episode": 8,
+      "mean_reward": 0.215661349540746,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 7
+    },
+    {
+      "episode": 9,
+      "mean_reward": 2.2558729316699413,
+      "collided": true,
+      "arrivals": 1,
+      "steps": 10
+    },
+    {
+      "episode": 10,
+      "mean_reward": 4.446897987947583,
+      "collided": true,
+      "arrivals": 2,
+      "steps": 9
+    },
+    {
+      "episode": 11,
+      "mean_reward": 1.7100401679273851,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 5
+    },
+    {
+      "episode": 12,
+      "mean_reward": 8.746319885661732,
+      "collided": false,
+      "arrivals": 4,
+      "steps": 14
+    },
+    {
+      "episode": 13,
+      "mean_reward": 1.5810229877016344,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
+    },
+    {
+      "episode": 14,
+      "mean_reward": 2.75,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 7
+    },
+    {
+      "episode": 15,
+      "mean_reward": 7.867312957194812,
+      "collided": false,
+      "arrivals": 2,
+      "steps": 20
+    },
+    {
+      "episode": 16,
+      "mean_reward": 9.153877762009502,
+      "collided": false,
+      "arrivals": 4,
+      "steps": 13
+    },
+    {
+      "episode": 17,
+      "mean_reward": 7.25611097207011,
       "collided": false,
       "arrivals": 1,
       "steps": 20
     },
     {
-      "episode": 4,
+      "episode": 18,
+      "mean_reward": 6.04422789976856,
+      "collided": true,
+      "arrivals": 2,
+      "steps": 10
+    },
+    {
+      "episode": 19,
+      "mean_reward": 3.0,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
+    },
+    {
+      "episode": 20,
+      "mean_reward": 4.4640935847276815,
+      "collided": true,
+      "arrivals": 2,
+      "steps": 10
+    },
+    {
+      "episode": 21,
       "mean_reward": 0.75,
       "collided": true,
       "arrivals": 0,
       "steps": 6
     },
     {
-      "episode": 5,
-      "mean_reward": 8.676265917231143,
-      "collided": false,
-      "arrivals": 4,
-      "steps": 15
-    },
-    {
-      "episode": 6,
-      "mean_reward": 1.5,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 6
-    },
-    {
-      "episode": 7,
-      "mean_reward": 7.097343758522385,
-      "collided": true,
-      "arrivals": 3,
-      "steps": 14
-    },
-    {
-      "episode": 8,
-      "mean_reward": 3.7946255324569327,
-      "collided": true,
-      "arrivals": 1,
-      "steps": 9
-    },
-    {
-      "episode": 9,
-      "mean_reward": 1.75,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 4
-    },
-    {
-      "episode": 10,
-      "mean_reward": 3.5,
-      "collided": true,
-      "arrivals": 2,
-      "steps": 8
-    },
-    {
-      "episode": 11,
-      "mean_reward": 1.0,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 6
-    },
-    {
-      "episode": 12,
-      "mean_reward": 5.0,
-      "collided": true,
-      "arrivals": 2,
-      "steps": 16
-    },
-    {
-      "episode": 13,
-      "mean_reward": 5.870940272245178,
-      "collided": false,
-      "arrivals": 0,
-      "steps": 20
-    },
-    {
-      "episode": 14,
-      "mean_reward": 3.8016814448723646,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 20
-    },
-    {
-      "episode": 15,
-      "mean_reward": 6.253435029965038,
-      "collided": false,
-      "arrivals": 1,
-      "steps": 20
-    },
-    {
-      "episode": 16,
-      "mean_reward": 7.701539890473554,
-      "collided": false,
-      "arrivals": 1,
-      "steps": 20
-    },
-    {
-      "episode": 17,
-      "mean_reward": 6.887432957771982,
-      "collided": true,
-      "arrivals": 3,
-      "steps": 15
-    },
-    {
-      "episode": 18,
-      "mean_reward": 3.0583130514460803,
-      "collided": true,
-      "arrivals": 2,
-      "steps": 13
-    },
-    {
-      "episode": 19,
-      "mean_reward": 1.175019127584469,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 5
-    },
-    {
-      "episode": 20,
-      "mean_reward": 6.275475714610796,
-      "collided": false,
-      "arrivals": 0,
-      "steps": 20
-    },
-    {
-      "episode": 21,
-      "mean_reward": 2.25,
-      "collided": false,
-      "arrivals": 0,
-      "steps": 20
-    },
-    {
       "episode": 22,
-      "mean_reward": 4.733933641946451,
+      "mean_reward": 4.522668983187794,
       "collided": true,
       "arrivals": 1,
-      "steps": 10
+      "steps": 12
     },
     {
       "episode": 23,
-      "mean_reward": 2.2896702703854217,
+      "mean_reward": 3.25,
       "collided": true,
       "arrivals": 0,
       "steps": 6
     },
     {
       "episode": 24,
-      "mean_reward": 2.157412877327859,
+      "mean_reward": 3.0,
       "collided": true,
       "arrivals": 0,
-      "steps": 6
+      "steps": 5
     },
     {
       "episode": 25,
-      "mean_reward": 6.0,
+      "mean_reward": 6.25,
       "collided": false,
       "arrivals": 0,
       "steps": 20
     },
     {
       "episode": 26,
-      "mean_reward": 5.158999248330184,
+      "mean_reward": 7.864386513487144,
+      "collided": false,
+      "arrivals": 1,
+      "steps": 20
+    },
+    {
+      "episode": 27,
+      "mean_reward": 7.2902867787357675,
       "collided": false,
       "arrivals": 2,
       "steps": 20
     },
     {
-      "episode": 27,
-      "mean_reward": 2.670302468665285,
-      "collided": true,
-      "arrivals": 1,
-      "steps": 10
-    },
-    {
       "episode": 28,
-      "mean_reward": 7.409079779555576,
-      "collided": false,
-      "arrivals": 1,
-      "steps": 20
+      "mean_reward": 1.75,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
     },
     {
       "episode": 29,
-      "mean_reward": 5.154376931391757,
-      "collided": false,
-      "arrivals": 0,
-      "steps": 20
+      "mean_reward": 2.933384793808679,
+      "collided": true,
+      "arrivals": 2,
+      "steps": 11
     },
     {
       "episode": 30,
-      "mean_reward": 8.906620849954784,
+      "mean_reward": 5.788760068561977,
       "collided": false,
       "arrivals": 1,
       "steps": 20
     },
     {
       "episode": 31,
-      "mean_reward": 6.697082687139959,
+      "mean_reward": 6.085373691261894,
       "collided": false,
-      "arrivals": 1,
+      "arrivals": 0,
       "steps": 20
     },
     {
       "episode": 32,
-      "mean_reward": 1.4209257383120744,
+      "mean_reward": 6.219387142390687,
       "collided": true,
-      "arrivals": 0,
-      "steps": 4
+      "arrivals": 2,
+      "steps": 15
     },
     {
       "episode": 33,
-      "mean_reward": 0.5746632323780483,
+      "mean_reward": 5.07709163527563,
       "collided": true,
-      "arrivals": 0,
-      "steps": 6
+      "arrivals": 1,
+      "steps": 8
     },
     {
       "episode": 34,
-      "mean_reward": 5.654017929670198,
+      "mean_reward": 1.7700325005861954,
       "collided": true,
-      "arrivals": 2,
-      "steps": 11
+      "arrivals": 0,
+      "steps": 9
     },
     {
       "episode": 35,
-      "mean_reward": 4.25,
+      "mean_reward": 7.0633661964628685,
       "collided": false,
       "arrivals": 0,
       "steps": 20
     },
     {
       "episode": 36,
-      "mean_reward": 2.4609002080641207,
-      "collided": true,
-      "arrivals": 1,
-      "steps": 16
-    },
-    {
-      "episode": 37,
-      "mean_reward": 8.387626892525947,
-      "collided": false,
-      "arrivals": 1,
-      "steps": 20
-    },
-    {
-      "episode": 38,
-      "mean_reward": 5.673360086796729,
-      "collided": false,
-      "arrivals": 0,
-      "steps": 20
-    },
-    {
-      "episode": 39,
-      "mean_reward": 2.5,
+      "mean_reward": 2.3106460447828416,
       "collided": true,
       "arrivals": 0,
       "steps": 6
     },
     {
-      "episode": 40,
-      "mean_reward": 7.404355708061274,
+      "episode": 37,
+      "mean_reward": 2.0396702703854217,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
+    },
+    {
+      "episode": 38,
+      "mean_reward": 6.521036945990734,
+      "collided": false,
+      "arrivals": 1,
+      "steps": 20
+    },
+    {
+      "episode": 39,
+      "mean_reward": 7.204831690297808,
       "collided": false,
       "arrivals": 0,
       "steps": 20
+    },
+    {
+      "episode": 40,
+      "mean_reward": 2.0,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
     },
     {
       "episode": 41,
-      "mean_reward": 2.4095543770614807,
+      "mean_reward": 7.560574983208067,
       "collided": true,
-      "arrivals": 1,
-      "steps": 14
-    },
-    {
-      "episode": 42,
-      "mean_reward": 8.607818358867185,
-      "collided": false,
-      "arrivals": 4,
+      "arrivals": 3,
       "steps": 12
     },
     {
-      "episode": 43,
-      "mean_reward": 5.5,
-      "collided": false,
-      "arrivals": 0,
+      "episode": 42,
+      "mean_reward": 6.521630690394922,
+      "collided": true,
+      "arrivals": 1,
       "steps": 20
+    },
+    {
+      "episode": 43,
+      "mean_reward": 8.02499408035066,
+      "collided": false,
+      "arrivals": 4,
+      "steps": 16
     },
     {
       "episode": 44,
-      "mean_reward": 4.88688770142909,
-      "collided": false,
-      "arrivals": 0,
-      "steps": 20
+      "mean_reward": 3.9203201534325816,
+      "collided": true,
+      "arrivals": 1,
+      "steps": 8
     },
     {
       "episode": 45,
-      "mean_reward": 1.3312616752740594,
+      "mean_reward": 2.9836913301731416,
       "collided": true,
       "arrivals": 0,
       "steps": 6
     },
     {
       "episode": 46,
-      "mean_reward": 7.272205822454264,
-      "collided": true,
-      "arrivals": 3,
-      "steps": 14
-    },
-    {
-      "episode": 47,
-      "mean_reward": 3.307305181506954,
-      "collided": true,
-      "arrivals": 2,
-      "steps": 14
-    },
-    {
-      "episode": 48,
-      "mean_reward": 1.75,
+      "mean_reward": 3.0,
       "collided": true,
       "arrivals": 0,
       "steps": 6
     },
     {
-      "episode": 49,
-      "mean_reward": 2.75,
+      "episode": 47,
+      "mean_reward": 8.25,
+      "collided": false,
+      "arrivals": 0,
+      "steps": 20
+    },
+    {
+      "episode": 48,
+      "mean_reward": 2.156683007322343,
       "collided": true,
       "arrivals": 0,
       "steps": 7
     },
     {
-      "episode": 50,
-      "mean_reward": 5.201884112438025,
+      "episode": 49,
+      "mean_reward": 3.4203201534325816,
       "collided": true,
-      "arrivals": 2,
+      "arrivals": 0,
+      "steps": 8
+    },
+    {
+      "episode": 50,
+      "mean_reward": 3.1374652174294937,
+      "collided": true,
+      "arrivals": 1,
       "steps": 9
     },
     {
       "episode": 51,
-      "mean_reward": 7.153369531284673,
-      "collided": false,
+      "mean_reward": 6.9863184566837155,
+      "collided": true,
       "arrivals": 2,
-      "steps": 20
+      "steps": 16
     },
     {
       "episode": 52,
-      "mean_reward": 8.616959616257803,
-      "collided": false,
+      "mean_reward": 5.1703201534325816,
+      "collided": true,
       "arrivals": 2,
-      "steps": 20
+      "steps": 11
     },
     {
       "episode": 53,
-      "mean_reward": 5.259528920281397,
+      "mean_reward": 4.005703300448141,
       "collided": true,
       "arrivals": 1,
       "steps": 10
     },
     {
       "episode": 54,
-      "mean_reward": 4.25,
+      "mean_reward": 5.5,
       "collided": false,
       "arrivals": 0,
       "steps": 20
     },
     {
       "episode": 55,
-      "mean_reward": 7.942554706378862,
-      "collided": false,
-      "arrivals": 1,
-      "steps": 20
+      "mean_reward": 6.890505801313463,
+      "collided": true,
+      "arrivals": 2,
+      "steps": 11
     },
     {
       "episode": 56,
-      "mean_reward": 6.3907392533017005,
-      "collided": false,
-      "arrivals": 0,
-      "steps": 20
+      "mean_reward": 1.8618268167618655,
+      "collided": true,
+      "arrivals": 1,
+      "steps": 7
     },
     {
       "episode": 57,
-      "mean_reward": 2.2215823758767774,
+      "mean_reward": 3.4812940151068394,
       "collided": true,
-      "arrivals": 0,
-      "steps": 6
+      "arrivals": 1,
+      "steps": 10
     },
     {
       "episode": 58,
-      "mean_reward": 1.75,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 6
-    },
-    {
-      "episode": 59,
-      "mean_reward": 2.75,
+      "mean_reward": 3.576712034861388,
       "collided": true,
       "arrivals": 0,
       "steps": 7
     },
     {
-      "episode": 60,
-      "mean_reward": 7.154358805553734,
-      "collided": false,
-      "arrivals": 0,
-      "steps": 20
-    },
-    {
-      "episode": 61,
-      "mean_reward": 5.482618810251375,
-      "collided": true,
-      "arrivals": 2,
-      "steps": 14
-    },
-    {
-      "episode": 62,
-      "mean_reward": 0.25,
+      "episode": 59,
+      "mean_reward": 0.775428621007888,
       "collided": true,
       "arrivals": 0,
       "steps": 5
     },
     {
-      "episode": 63,
-      "mean_reward": 0.0,
+      "episode": 60,
+      "mean_reward": 1.5,
       "collided": true,
       "arrivals": 0,
       "steps": 6
     },
     {
-      "episode": 64,
-      "mean_reward": 8.383162760740177,
-      "collided": false,
-      "arrivals": 4,
-      "steps": 15
-    },
-    {
-      "episode": 65,
-      "mean_reward": 1.1566861203500973,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 7
-    },
-    {
-      "episode": 66,
-      "mean_reward": 0.75,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 6
-    },
-    {
-      "episode": 67,
-      "mean_reward": -0.34319270755163367,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 6
-    },
-    {
-      "episode": 68,
-      "mean_reward": 6.154355708061274,
+      "episode": 61,
+      "mean_reward": 7.037862316413788,
       "collided": true,
       "arrivals": 2,
       "steps": 13
     },
     {
-      "episode": 69,
-      "mean_reward": 7.3845931390108115,
+      "episode": 62,
+      "mean_reward": 3.8875448742561236,
       "collided": true,
-      "arrivals": 3,
-      "steps": 18
+      "arrivals": 2,
+      "steps": 11
     },
     {
-      "episode": 70,
-      "mean_reward": 6.25,
-      "collided": false,
-      "arrivals": 1,
-      "steps": 20
-    },
-    {
-      "episode": 71,
-      "mean_reward": 6.40740699615459,
+      "episode": 63,
+      "mean_reward": 7.310979843471543,
       "collided": false,
       "arrivals": 0,
       "steps": 20
     },
     {
-      "episode": 72,
-      "mean_reward": 8.255872299462684,
+      "episode": 64,
+      "mean_reward": 1.6380135893641645,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
+    },
+    {
+      "episode": 65,
+      "mean_reward": 2.920305049713223,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
+    },
+    {
+      "episode": 66,
+      "mean_reward": 7.6149283149339615,
       "collided": false,
       "arrivals": 1,
       "steps": 20
     },
     {
-      "episode": 73,
-      "mean_reward": 6.653877762385648,
+      "episode": 67,
+      "mean_reward": 6.717280563428297,
+      "collided": true,
+      "arrivals": 1,
+      "steps": 18
+    },
+    {
+      "episode": 68,
+      "mean_reward": 6.618913782539779,
+      "collided": true,
+      "arrivals": 3,
+      "steps": 13
+    },
+    {
+      "episode": 69,
+      "mean_reward": 7.0,
+      "collided": false,
+      "arrivals": 0,
+      "steps": 20
+    },
+    {
+      "episode": 70,
+      "mean_reward": 3.521629995413228,
+      "collided": true,
+      "arrivals": 1,
+      "steps": 19
+    },
+    {
+      "episode": 71,
+      "mean_reward": 2.1050034321130995,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
+    },
+    {
+      "episode": 72,
+      "mean_reward": 4.5,
       "collided": true,
       "arrivals": 2,
-      "steps": 17
+      "steps": 11
+    },
+    {
+      "episode": 73,
+      "mean_reward": 1.5,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 7
     },
     {
       "episode": 74,
-      "mean_reward": 9.521726711749087,
-      "collided": false,
-      "arrivals": 4,
-      "steps": 12
+      "mean_reward": 1.75,
+      "collided": true,
+      "arrivals": 1,
+      "steps": 13
     },
     {
       "episode": 75,
-      "mean_reward": 0.75,
+      "mean_reward": 2.0,
       "collided": true,
       "arrivals": 0,
       "steps": 4
     },
     {
       "episode": 76,
-      "mean_reward": 7.389792698508746,
-      "collided": false,
-      "arrivals": 0,
-      "steps": 20
+      "mean_reward": 3.639872279961578,
+      "collided": true,
+      "arrivals": 2,
+      "steps": 9
     },
     {
       "episode": 77,
-      "mean_reward": 2.8454276646286645,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 5
-    },
-    {
-      "episode": 78,
-      "mean_reward": 1.289687754828544,
-      "collided": true,
-      "arrivals": 0,
-      "steps": 5
-    },
-    {
-      "episode": 79,
-      "mean_reward": 0.75,
+      "mean_reward": 2.433162030564459,
       "collided": true,
       "arrivals": 0,
       "steps": 6
+    },
+    {
+      "episode": 78,
+      "mean_reward": 0.4203050497132228,
+      "collided": true,
+      "arrivals": 0,
+      "steps": 6
+    },
+    {
+      "episode": 79,
+      "mean_reward": 4.576571682165952,
+      "collided": false,
+      "arrivals": 1,
+      "steps": 20
     }
   ]
 }

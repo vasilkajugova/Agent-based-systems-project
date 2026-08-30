@@ -8,245 +8,266 @@
     "baseline": [
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.76404047211158,
-        "std_reward": 3.475474208945386,
-        "ci95_reward": 0.7615968653544207,
-        "collision_rate": 0.575,
-        "arrival_rate": 0.4583333333333333,
-        "avg_steps": 9.3625,
+        "mean_reward": 5.587792158347247,
+        "std_reward": 2.8902318427446074,
+        "ci95_reward": 0.6333499773689195,
+        "collision_rate": 0.6,
+        "arrival_rate": 0.37083333333333335,
+        "avg_steps": 10.8875,
         "seed": 0
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.641243086371658,
-        "std_reward": 3.2129091316430767,
-        "ci95_reward": 0.7040597559406065,
-        "collision_rate": 0.5875,
-        "arrival_rate": 0.4375,
-        "avg_steps": 10.8875,
+        "mean_reward": 5.182299143452658,
+        "std_reward": 2.6052680531929595,
+        "ci95_reward": 0.5709045337217035,
+        "collision_rate": 0.55,
+        "arrival_rate": 0.23750000000000002,
+        "avg_steps": 13.3375,
         "seed": 1
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.855423264934342,
-        "std_reward": 2.697063330418738,
-        "ci95_reward": 0.5910200607509508,
+        "mean_reward": 5.6215994582713,
+        "std_reward": 3.1061016018083425,
+        "ci95_reward": 0.6806545240131148,
         "collision_rate": 0.6125,
-        "arrival_rate": 0.44166666666666665,
-        "avg_steps": 11.3875,
+        "arrival_rate": 0.35000000000000003,
+        "avg_steps": 11.1875,
         "seed": 2
       }
     ],
     "lr_low": [
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 6.086642868996708,
-        "std_reward": 3.148126016276162,
-        "ci95_reward": 0.6898635298646525,
-        "collision_rate": 0.575,
-        "arrival_rate": 0.48333333333333334,
-        "avg_steps": 9.7875,
+        "mean_reward": 5.892082102920298,
+        "std_reward": 3.064491770497962,
+        "ci95_reward": 0.6715363677015684,
+        "collision_rate": 0.6375,
+        "arrival_rate": 0.45416666666666666,
+        "avg_steps": 9.225,
         "seed": 0
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 6.178598618932314,
-        "std_reward": 3.46353899339618,
-        "ci95_reward": 0.7589814459315953,
-        "collision_rate": 0.6,
-        "arrival_rate": 0.49583333333333335,
-        "avg_steps": 8.7,
+        "mean_reward": 6.584995872744633,
+        "std_reward": 3.1090337950694997,
+        "ci95_reward": 0.6812970691917161,
+        "collision_rate": 0.5625,
+        "arrival_rate": 0.5583333333333333,
+        "avg_steps": 9.3375,
         "seed": 1
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 6.3960905191563535,
-        "std_reward": 2.9029642676848915,
-        "ci95_reward": 0.6361400930020387,
+        "mean_reward": 6.0745506082640635,
+        "std_reward": 3.1618735885765292,
+        "ci95_reward": 0.6928760994711954,
         "collision_rate": 0.525,
-        "arrival_rate": 0.4375,
-        "avg_steps": 11.1625,
+        "arrival_rate": 0.49583333333333335,
+        "avg_steps": 9.8625,
         "seed": 2
       }
     ],
     "lr_high": [
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 4.786193820555987,
-        "std_reward": 3.361691302773294,
-        "ci95_reward": 0.7366630866923494,
-        "collision_rate": 0.625,
-        "arrival_rate": 0.3333333333333333,
-        "avg_steps": 9.8375,
+        "mean_reward": 5.64606652303638,
+        "std_reward": 3.43023754207056,
+        "ci95_reward": 0.7516839436580735,
+        "collision_rate": 0.5625,
+        "arrival_rate": 0.4583333333333333,
+        "avg_steps": 9.45,
         "seed": 0
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.8002725009176865,
-        "std_reward": 3.0667171365109636,
-        "ci95_reward": 0.6720240225301976,
-        "collision_rate": 0.55,
-        "arrival_rate": 0.42083333333333334,
-        "avg_steps": 11.45,
+        "mean_reward": 5.191171451454947,
+        "std_reward": 3.6515809563978174,
+        "ci95_reward": 0.8001879578972231,
+        "collision_rate": 0.6375,
+        "arrival_rate": 0.43333333333333335,
+        "avg_steps": 8.65,
         "seed": 1
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 4.952362728215571,
-        "std_reward": 3.443240074407869,
-        "ci95_reward": 0.754533249184288,
-        "collision_rate": 0.65,
-        "arrival_rate": 0.35833333333333334,
-        "avg_steps": 9.525,
+        "mean_reward": 5.790927713815617,
+        "std_reward": 3.0794505931848546,
+        "ci95_reward": 0.6748143642519117,
+        "collision_rate": 0.5,
+        "arrival_rate": 0.4166666666666667,
+        "avg_steps": 11.65,
         "seed": 2
       }
     ],
     "gamma_low": [
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.511800312287949,
-        "std_reward": 3.3093474245355834,
-        "ci95_reward": 0.7251927286376911,
-        "collision_rate": 0.575,
-        "arrival_rate": 0.3958333333333333,
-        "avg_steps": 10.025,
+        "mean_reward": 6.279645349505433,
+        "std_reward": 3.1754561847250398,
+        "ci95_reward": 0.6958525170844971,
+        "collision_rate": 0.5625,
+        "arrival_rate": 0.5166666666666667,
+        "avg_steps": 9.7,
         "seed": 0
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 6.452533022236651,
-        "std_reward": 3.21617732088549,
-        "ci95_reward": 0.7047759294849247,
-        "collision_rate": 0.5375,
-        "arrival_rate": 0.5583333333333333,
-        "avg_steps": 9.675,
+        "mean_reward": 5.350616677950198,
+        "std_reward": 3.342722393518516,
+        "ci95_reward": 0.732506341178184,
+        "collision_rate": 0.6125,
+        "arrival_rate": 0.41250000000000003,
+        "avg_steps": 9.5375,
         "seed": 1
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.637590666343376,
-        "std_reward": 3.4407738997907082,
-        "ci95_reward": 0.7539928248436291,
-        "collision_rate": 0.6625,
-        "arrival_rate": 0.4083333333333334,
-        "avg_steps": 9.975,
+        "mean_reward": 6.235615473780974,
+        "std_reward": 2.879736509272088,
+        "ci95_reward": 0.6310500860179935,
+        "collision_rate": 0.5375,
+        "arrival_rate": 0.4375,
+        "avg_steps": 11.3125,
         "seed": 2
       }
     ],
     "gamma_high": [
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 2.585650746314515,
-        "std_reward": 1.7842388099581257,
-        "ci95_reward": 0.39098856818165034,
-        "collision_rate": 0.3625,
-        "arrival_rate": 0.09999999999999999,
-        "avg_steps": 16.9,
+        "mean_reward": 2.1195440708734936,
+        "std_reward": 1.3604435195134283,
+        "ci95_reward": 0.2981203305397465,
+        "collision_rate": 0.2875,
+        "arrival_rate": 0.08333333333333333,
+        "avg_steps": 18.175,
         "seed": 0
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 3.323549652915078,
-        "std_reward": 2.113929137114248,
-        "ci95_reward": 0.4632351465200833,
-        "collision_rate": 0.4625,
-        "arrival_rate": 0.14583333333333334,
-        "avg_steps": 15.5875,
+        "mean_reward": 4.132181875222504,
+        "std_reward": 2.2576535002271507,
+        "ci95_reward": 0.4947301362225281,
+        "collision_rate": 0.5,
+        "arrival_rate": 0.15,
+        "avg_steps": 14.9875,
         "seed": 1
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.377807583900216,
-        "std_reward": 2.6729141809975916,
-        "ci95_reward": 0.5857281450599116,
-        "collision_rate": 0.4875,
-        "arrival_rate": 0.32083333333333336,
-        "avg_steps": 13.7625,
+        "mean_reward": 4.236699895874848,
+        "std_reward": 1.8691088435247125,
+        "ci95_reward": 0.4095865342837929,
+        "collision_rate": 0.4125,
+        "arrival_rate": 0.17916666666666667,
+        "avg_steps": 16.175,
         "seed": 2
       }
     ],
     "eps_frac_low": [
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.728468576737678,
-        "std_reward": 3.097074072819844,
-        "ci95_reward": 0.6786762795013759,
-        "collision_rate": 0.5625,
-        "arrival_rate": 0.3541666666666667,
-        "avg_steps": 10.9625,
+        "mean_reward": 5.291847597735657,
+        "std_reward": 3.232548723281591,
+        "ci95_reward": 0.7083634712121037,
+        "collision_rate": 0.6375,
+        "arrival_rate": 0.42083333333333334,
+        "avg_steps": 10.0375,
         "seed": 0
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.4357377523201915,
-        "std_reward": 2.9924598407102816,
-        "ci95_reward": 0.6557516751291054,
-        "collision_rate": 0.6125,
-        "arrival_rate": 0.37083333333333335,
-        "avg_steps": 11.2625,
+        "mean_reward": 5.676977491054016,
+        "std_reward": 3.260666410148003,
+        "ci95_reward": 0.7145250310140321,
+        "collision_rate": 0.6,
+        "arrival_rate": 0.45416666666666666,
+        "avg_steps": 10.1,
         "seed": 1
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 6.0355053692823715,
-        "std_reward": 3.1864468595921216,
-        "ci95_reward": 0.6982609549043937,
-        "collision_rate": 0.55,
-        "arrival_rate": 0.5,
-        "avg_steps": 10.5625,
+        "mean_reward": 5.032088311415609,
+        "std_reward": 3.0245256491930306,
+        "ci95_reward": 0.6627784052261552,
+        "collision_rate": 0.6625,
+        "arrival_rate": 0.33749999999999997,
+        "avg_steps": 10.775,
         "seed": 2
       }
     ],
     "eps_frac_high": [
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 6.275292106164622,
-        "std_reward": 3.2944494403985667,
-        "ci95_reward": 0.721928063922399,
-        "collision_rate": 0.525,
-        "arrival_rate": 0.5416666666666666,
-        "avg_steps": 9.375,
+        "mean_reward": 5.7134010676508975,
+        "std_reward": 3.292106857332912,
+        "ci95_reward": 0.7214147227745801,
+        "collision_rate": 0.5875,
+        "arrival_rate": 0.4291666666666667,
+        "avg_steps": 10.0625,
         "seed": 0
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 5.778916418231175,
-        "std_reward": 2.815465113113945,
-        "ci95_reward": 0.6169659953577877,
-        "collision_rate": 0.65,
-        "arrival_rate": 0.44166666666666665,
-        "avg_steps": 11.3,
+        "mean_reward": 4.986361527397021,
+        "std_reward": 2.4077413986812446,
+        "ci95_reward": 0.5276195970897851,
+        "collision_rate": 0.525,
+        "arrival_rate": 0.15416666666666667,
+        "avg_steps": 13.7,
         "seed": 1
       },
       {
         "method": "vdn",
+        "obs_mode": "kinematics",
         "episodes": 80,
-        "mean_reward": 4.989344994700348,
-        "std_reward": 3.066723253999712,
-        "ci95_reward": 0.6720253630840255,
-        "collision_rate": 0.675,
-        "arrival_rate": 0.3541666666666667,
-        "avg_steps": 10.725,
+        "mean_reward": 5.7726879170009875,
+        "std_reward": 3.6896951276529673,
+        "ci95_reward": 0.8085400939248162,
+        "collision_rate": 0.5875,
+        "arrival_rate": 0.5125000000000001,
+        "avg_steps": 8.725,
         "seed": 2
       }
     ]
@@ -255,134 +276,134 @@
     "baseline": {
       "label": "baseline (lr=1e-3, gamma=0.95, eps_frac=0.7)",
       "reward": {
-        "mean": 5.753568941139193,
-        "ci95": 0.0993003349038715
+        "mean": 5.4638969200237355,
+        "ci95": 0.22586577946830524
       },
       "collision_rate": {
-        "mean": 0.5916666666666667,
-        "ci95": 0.01764201634566588
+        "mean": 0.5875,
+        "ci95": 0.030556868658653848
       },
       "arrival_rate": {
-        "mean": 0.4458333333333333,
-        "ci95": 0.010185622886217945
+        "mean": 0.3194444444444445,
+        "ci95": 0.06627180905103708
       },
       "avg_steps": {
-        "mean": 10.545833333333333,
-        "ci95": 0.9746315923161629
+        "mean": 11.804166666666667,
+        "ci95": 1.234725100609069
       }
     },
     "lr_low": {
       "label": "lr=3e-4",
       "reward": {
-        "mean": 6.220444002361791,
-        "ci95": 0.146826369606888
+        "mean": 6.183876194642998,
+        "ci95": 0.33184759167897004
       },
       "collision_rate": {
-        "mean": 0.5666666666666665,
-        "ci95": 0.03528403269133166
+        "mean": 0.5750000000000001,
+        "ci95": 0.05292604903699749
       },
       "arrival_rate": {
-        "mean": 0.47222222222222227,
-        "ci95": 0.028377344177203064
+        "mean": 0.5027777777777778,
+        "ci95": 0.04844229947680873
       },
       "avg_steps": {
-        "mean": 9.883333333333333,
-        "ci95": 1.1401984801226823
+        "mean": 9.475,
+        "ci95": 0.31439015039702967
       }
     },
     "lr_high": {
       "label": "lr=3e-3",
       "reward": {
-        "mean": 5.1796096832297485,
-        "ci95": 0.5025316470012131
+        "mean": 5.542721896102314,
+        "ci95": 0.2891499775217351
       },
       "collision_rate": {
-        "mean": 0.6083333333333334,
-        "ci95": 0.048084031383340484
+        "mean": 0.5666666666666667,
+        "ci95": 0.06360919453687201
       },
       "arrival_rate": {
-        "mean": 0.37083333333333335,
-        "ci95": 0.04164199269434109
+        "mean": 0.4361111111111111,
+        "ci95": 0.019376919790723476
       },
       "avg_steps": {
-        "mean": 10.270833333333334,
-        "ci95": 0.9545106463911616
+        "mean": 9.916666666666666,
+        "ci95": 1.435352169974969
       }
     },
     "gamma_low": {
       "label": "gamma=0.90",
       "reward": {
-        "mean": 5.8673080002893245,
-        "ci95": 0.47186956288681003
+        "mean": 5.9552925004122015,
+        "ci95": 0.48426880240173664
       },
       "collision_rate": {
-        "mean": 0.5916666666666667,
-        "ci95": 0.05926697287759916
+        "mean": 0.5708333333333333,
+        "ci95": 0.03528403269133172
       },
       "arrival_rate": {
-        "mean": 0.45416666666666666,
-        "ci95": 0.08355049482310194
+        "mean": 0.45555555555555555,
+        "ci95": 0.0502444845774407
       },
       "avg_steps": {
-        "mean": 9.891666666666667,
-        "ci95": 0.17490145373472002
+        "mean": 10.183333333333332,
+        "ci95": 0.906634874851115
       }
     },
     "gamma_high": {
       "label": "gamma=0.99",
       "reward": {
-        "mean": 3.7623359943766026,
-        "ci95": 1.336840392323226
+        "mean": 3.4961419473236153,
+        "ci95": 1.1025654917676269
       },
       "collision_rate": {
-        "mean": 0.4375,
-        "ci95": 0.0611137373173077
+        "mean": 0.39999999999999997,
+        "ci95": 0.0986782087843557
       },
       "arrival_rate": {
-        "mean": 0.18888888888888888,
-        "ci95": 0.10767986197473102
+        "mean": 0.13749999999999998,
+        "ci95": 0.04538851489034002
       },
       "avg_steps": {
-        "mean": 15.416666666666666,
-        "ci95": 1.455882518408476
+        "mean": 16.445833333333336,
+        "ci95": 1.4884109411145936
       }
     },
     "eps_frac_low": {
       "label": "eps_frac=0.5",
       "reward": {
-        "mean": 5.7332372327800805,
-        "ci95": 0.27710477512216275
+        "mean": 5.333637800068427,
+        "ci95": 0.2997943416902287
       },
       "collision_rate": {
-        "mean": 0.5750000000000001,
-        "ci95": 0.03055686865865386
+        "mean": 0.6333333333333333,
+        "ci95": 0.029065379686085236
       },
       "arrival_rate": {
-        "mean": 0.4083333333333334,
-        "ci95": 0.07375162689145102
+        "mean": 0.4041666666666666,
+        "ci95": 0.05552265692578812
       },
       "avg_steps": {
-        "mean": 10.929166666666667,
-        "ci95": 0.3244815808274733
+        "mean": 10.304166666666667,
+        "ci95": 0.3778499359191084
       }
     },
     "eps_frac_high": {
       "label": "eps_frac=0.9",
       "reward": {
-        "mean": 5.681184506365381,
-        "ci95": 0.5992022283307633
+        "mean": 5.490816837349635,
+        "ci95": 0.4045764780054855
       },
       "collision_rate": {
-        "mean": 0.6166666666666667,
-        "ci95": 0.07425232257247855
+        "mean": 0.5666666666666668,
+        "ci95": 0.03334027705454881
       },
       "arrival_rate": {
-        "mean": 0.4458333333333333,
-        "ci95": 0.0866847203418269
+        "mean": 0.3652777777777778,
+        "ci95": 0.1732554193357833
       },
       "avg_steps": {
-        "mean": 10.466666666666667,
-        "ci95": 0.9130123929222593
+        "mean": 10.829166666666666,
+        "ci95": 2.3787954740598036
       }
     }
   }

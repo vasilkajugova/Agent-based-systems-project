@@ -1,0 +1,138 @@
+{
+  "alpha": 0.05,
+  "source": "C:\\Users\\vasil\\OneDrive\\Desktop\\Agentbasedsystemsprojectfinal\\results\\comparison_summary.json",
+  "results": [
+    {
+      "a": "iql",
+      "b": "vdn",
+      "metric": "mean_reward",
+      "mean_a": 5.964082885380969,
+      "mean_b": 5.758468145590263,
+      "t": 1.0030098770061264,
+      "df": 6.135951903519817,
+      "p": 0.3537566727796652,
+      "significant": false
+    },
+    {
+      "a": "iql",
+      "b": "vdn",
+      "metric": "collision_rate",
+      "mean_a": 0.576,
+      "mean_b": 0.5146666666666666,
+      "t": 2.1447610589527213,
+      "df": 6.085618555959791,
+      "p": 0.07500920945686736,
+      "significant": false
+    },
+    {
+      "a": "iql",
+      "b": "vdn",
+      "metric": "arrival_rate",
+      "mean_a": 0.4946666666666667,
+      "mean_b": 0.43866666666666665,
+      "t": 1.247249681172284,
+      "df": 5.025015438007097,
+      "p": 0.2672821582787484,
+      "significant": false
+    },
+    {
+      "a": "iql",
+      "b": "vdn",
+      "metric": "avg_steps",
+      "mean_a": 8.328,
+      "mean_b": 10.760000000000002,
+      "t": -4.684459384449635,
+      "df": 4.814312052676091,
+      "p": 0.005956050778023994,
+      "significant": true
+    },
+    {
+      "a": "iql",
+      "b": "heuristic",
+      "metric": "mean_reward",
+      "mean_a": 5.964082885380969,
+      "mean_b": 4.692733640958798,
+      "t": 12.936953067006398,
+      "df": 4.192234006619487,
+      "p": 0.0001548155727175927,
+      "significant": true
+    },
+    {
+      "a": "iql",
+      "b": "heuristic",
+      "metric": "collision_rate",
+      "mean_a": 0.576,
+      "mean_b": 0.6466666666666667,
+      "t": -2.7875439201025483,
+      "df": 4.055707604902734,
+      "p": 0.048670993853730915,
+      "significant": true
+    },
+    {
+      "a": "iql",
+      "b": "heuristic",
+      "metric": "arrival_rate",
+      "mean_a": 0.4946666666666667,
+      "mean_b": 0.3435555555555555,
+      "t": 9.874796123548746,
+      "df": 4.0611948889394185,
+      "p": 0.0005470381318136913,
+      "significant": true
+    },
+    {
+      "a": "iql",
+      "b": "heuristic",
+      "metric": "avg_steps",
+      "mean_a": 8.328,
+      "mean_b": 9.174666666666667,
+      "t": -5.275298338429745,
+      "df": 4.197037529985371,
+      "p": 0.005409120455261818,
+      "significant": true
+    },
+    {
+      "a": "vdn",
+      "b": "heuristic",
+      "metric": "mean_reward",
+      "mean_a": 5.758468145590263,
+      "mean_b": 4.692733640958798,
+      "t": 5.8827380603615635,
+      "df": 4.05565183324758,
+      "p": 0.003995972712394405,
+      "significant": true
+    },
+    {
+      "a": "vdn",
+      "b": "heuristic",
+      "metric": "collision_rate",
+      "mean_a": 0.5146666666666666,
+      "mean_b": 0.6466666666666667,
+      "t": -9.731169106223211,
+      "df": 4.197898552499448,
+      "p": 0.0004910183689897713,
+      "significant": true
+    },
+    {
+      "a": "vdn",
+      "b": "heuristic",
+      "metric": "arrival_rate",
+      "mean_a": 0.43866666666666665,
+      "mean_b": 0.3435555555555555,
+      "t": 2.2510109356358745,
+      "df": 4.007974297094012,
+      "p": 0.08741383841623945,
+      "significant": false
+    },
+    {
+      "a": "vdn",
+      "b": "heuristic",
+      "metric": "avg_steps",
+      "mean_a": 10.760000000000002,
+      "mean_b": 9.174666666666667,
+      "t": 3.202787281479595,
+      "df": 4.020280658197473,
+      "p": 0.03257891445014589,
+      "significant": true
+    }
+  ]
+}
