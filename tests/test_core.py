@@ -607,5 +607,101 @@ class TestRunTrainingTag(unittest.TestCase):
                          "очекував по еден history.json за секој tag")
 
 
+class TestSeedReproducibility(unittest.TestCase):
+    """
+    Регресионен тест за реален баг најден дури при финалната ревизија на
+    целиот проект (по многу сесии работа - откриен само затоа што
+    случајно ги споредив два "идентични" повторени тренинзи бајт-по-бајт).
+    `train.py::set_global_seed()` го seed-ираше numpy И torch, но НЕ и
+    Python-овиот вграден `random` модул - а `agents/networks.py::
+    ReplayBuffer`/`MultiAgentReplayBuffer` го користат `random.sample()`
+    за batch sampling во ВСЕКОЈ train_step(). Резултат: два стартувања со
+    ИСТ --seed сепак произведуваа РАЗЛИЧНИ финални тежини/резултати - env
+    динамиката и почетната иницијализација на тежините ВЕЌЕ беа
+    репродуцибилни (numpy/torch seed-ирани), но самиот редослед на
+    batch-ови при тренирање не беше, бидејќи Python-овиот `random` модул
+    си имаше СОПСТВЕНА, OS-ентропија-seed-ирана состојба, целосно
+    независна од `np.random.seed()`.
+    """
+
+    def test_same_seed_produces_identical_training_history(self):
+        import uuid
+
+        import train as train_module
+
+        # Уникатен суфикс - истата причина како во TestRunTrainingTag погоре.
+        run_id = uuid.uuid4().hex[:8]
+        tags = [f"reprotest{run_id}A", f"reprotest{run_id}B"]
+
+        def _cleanup():
+            for tag in tags:
+                for f in train_module.RESULTS_DIR.glob(f"vdn_{tag}*"):
+                    f.unlink()
+
+        self.addCleanup(_cleanup)
+
+        histories = [
+            train_module.run_training(method="vdn", num_agents=2, episodes=8, seed=555, tag=tag,
+                                       checkpoint_every=1000, verbose_every=1000)
+            for tag in tags
+        ]
+        self.assertEqual(
+            histories[0], histories[1],
+            "два run_training() повикувања со ИСТ seed мора да дадат ИДЕНТИЧНА историја "
+            "(regression за баг: random.sample() во replay buffer-ите не беше seed-иран)",
+        )
+
+
+class TestEnvClosedOnException(unittest.TestCase):
+    """
+    Регресионен тест за реален проблем најден при финалната ревизија на
+    целиот проект: train.py::run_training() и evaluate.py::evaluate() го
+    викаа env.close() БЕЗ try/finally - ако се случеше исклучок среде
+    тренирање/евалуација (пр. непознат метод, лош хиперпараметар, NaN
+    loss), env-от (и pygame/highway-env ресурсите зад него) никогаш не се
+    затвораше. Особено релевантно за pixels/fusion режимите, каде секој
+    env носи pygame viewer-и по агент - протекување на многу такви
+    ресурси среде долг паралелен тренинг би можело да влијае на
+    подоцнежни job-ови во ИСТИОТ worker процес (ProcessPoolExecutor ги
+    реупотребува процесите).
+
+    Го тестирам со намерно "расипан" метод (непостоечко име) - ова
+    гарантирано фрла ValueError рано, пред env.close() воопшто да се
+    достигне на нормалниот пат, значи е чист начин да се провери дека
+    finally-блокот РЕАЛНО се извршува.
+    """
+
+    def _patch_close(self):
+        from envs.multi_agent_intersection import MultiAgentIntersectionEnv
+
+        closed = {"called": False}
+        orig_close = MultiAgentIntersectionEnv.close
+
+        def patched_close(env_self):
+            closed["called"] = True
+            orig_close(env_self)
+
+        MultiAgentIntersectionEnv.close = patched_close
+        self.addCleanup(lambda: setattr(MultiAgentIntersectionEnv, "close", orig_close))
+        return closed
+
+    def test_run_training_closes_env_even_on_exception(self):
+        import train as train_module
+
+        closed = self._patch_close()
+        with self.assertRaises(ValueError):
+            train_module.run_training(method="not_a_real_method", num_agents=2, episodes=5, seed=0)
+        self.assertTrue(closed["called"], "env.close() мора да се повика дури и кога run_training() фрла исклучок")
+
+    def test_evaluate_closes_env_even_on_exception(self):
+        import evaluate as evaluate_module
+
+        closed = self._patch_close()
+        with self.assertRaises(ValueError):
+            evaluate_module.evaluate(method="not_a_real_method", model_prefix=None, num_agents=2,
+                                      episodes=2, save=False)
+        self.assertTrue(closed["called"], "env.close() мора да се повика дури и кога evaluate() фрла исклучок")
+
+
 if __name__ == "__main__":
     unittest.main()

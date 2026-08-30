@@ -1,6 +1,6 @@
 """
 Ова е мојата сопствена "обвивка" (wrapper) околу околината intersection-v2
-од библиотеката highway-env. Ми требаше затоа што highway-env "из кутија"
+од библиотеката highway-env. Ми требаше затоа што highway-env
 не поддржува сè што ми е потребно за мулти-агентен RL проект:
 
   1. Можност сама да одберам колку возила да контролирам (колку "агенти"
@@ -26,14 +26,60 @@ MultiAgentObservation (токму она што ми треба мене за м
 сетинг). Затоа морам да "влезам подлабоко" преку `env.unwrapped` и да ја
 викам таа функција директно, за секое возило одделно - тоа е всушност
 најважниот дел од овој фајл (методот `step()` подолу).
+
+Проширување - 3 observation режими (`obs_mode`), за advanced студијата:
+  - "kinematics" (default) - точно постоечкото однесување, ништо не се
+    менува.
+  - "pixels" - секој агент добива СОПСТВЕНА, локална, agent-centric сива
+    (grayscale) слика, наместо kinematics вектор.
+  - "fusion" - секој агент добива И kinematics вектор И локална слика.
+
+За "своја локална слика по агент" (не еден ист глобален screenshot за
+сите) го искористив истиот трик што highway-env веќе го користи внатрешно
+за Kinematics: `MultiAgentObservation` (highway_env/envs/common/
+observation.py) создава по ЕДНА одделна observation-инстанца за секое
+контролирано возило и ѝ поставува `observer_vehicle = <тоа возило>`
+(`obs_type.observer_vehicle = vehicle`). `GrayscaleObservation` внатрешно
+ја центрира камерата токму на `self.observer_vehicle` - значи ако ѝ
+проследам `GrayscaleObservation` конфигурација на `MultiAgentObservation`,
+секој агент автоматски добива своја, ego-центрирана сива слика, без јас
+рачно да сечам crop-ови од една голема слика. Го проверив ова емпириски
+(два различни агенти, `np.array_equal` -> False - реално различни слики).
+
+Официјалниот gym observation на `self.env` останува СЕКОГАШ Kinematics-
+базиран (за да "kinematics" режимот е byte-идентичен со постоечкиот) - за
+pixel-податоците конструирам ВТОРА, рачно повикувана `MultiAgentObservation`
+инстанца директно врз `self.env.unwrapped` (истиот "reach into
+env.unwrapped" пристап како за `_agent_reward` погоре), и ја викам
+рачно во `reset()`/`step()`. Ова е методолошки важно: наградата/
+терминацијата/физиката (`_agent_reward`, `has_arrived`, courtesy shaping)
+воопшто не зависат од observation type - истата динамика важи и за трите
+режими, се разликува единствено функцијата на опсервација.
 """
 from __future__ import annotations
+
+import sys
+from pathlib import Path
 
 import numpy as np
 import gymnasium as gym
 import highway_env  # noqa: F401  (само со тоа што се импортира, highway-env си ги регистрира своите околини кај gymnasium)
+from highway_env.envs.common.observation import MultiAgentObservation
+
+# Потребно за `from agents.networks import ...` подолу да работи и кога
+# овој фајл се пушта директно како скрипта (python envs/multi_agent_intersection.py)
+# - тогаш Python на sys.path[0] го става envs/, не root-от на проектот
+# (agents/ е sibling package на envs/). Истиот trick како во
+# experiments/run_comparison.py (таму истиот проблем важи и за train.py).
+# Кога модулот се увезува нормално (train.py/evaluate.py/tests стартувани
+# од root-от), ова е no-op - root-от веќе е на sys.path.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from agents.networks import FusionState
 
 gym.register_envs(highway_env)
+
+OBS_MODES = ("kinematics", "pixels", "fusion")
 
 
 # Тука ги имам сите поставки на околината на едно место, за полесно да ги
@@ -132,7 +178,16 @@ class MultiAgentIntersectionEnv:
         courtesy_weight: float = 0.0,
         courtesy_distance: float = 12.0,
         courtesy_speed_threshold: float = 6.0,
+        obs_mode: str = "kinematics",
+        pixel_image_size: tuple[int, int] = (64, 64),
+        pixel_stack_size: int = 4,
+        pixel_scaling: float = 1.8,
+        pixel_centering_position: list[float] | None = None,
+        pixel_weights: list[float] | None = None,
     ):
+        if obs_mode not in OBS_MODES:
+            raise ValueError(f"Непознат obs_mode: {obs_mode!r} (очекувам едно од {OBS_MODES})")
+
         cfg = {**DEFAULT_CONFIG, "controlled_vehicles": num_agents}
         if config_overrides:
             cfg.update(config_overrides)
@@ -140,6 +195,7 @@ class MultiAgentIntersectionEnv:
         self.courtesy_weight = courtesy_weight
         self.courtesy_distance = courtesy_distance
         self.courtesy_speed_threshold = courtesy_speed_threshold
+        self.obs_mode = obs_mode
 
         # render_mode="rgb_array" ми е потребен за watch.py (снимање
         # фрејмови за GIF/споредба), а не влијае на постоечкото однесување:
@@ -155,12 +211,64 @@ class MultiAgentIntersectionEnv:
         # "flatten" флагот правилно до внатрешните KinematicObservation
         # објекти (останува во облик (vehicles_count, 7) наместо еден
         # вектор), па го правам flatten-ирањето рачно во методот _flatten.
+        # Ова секогаш го пресметувам (дури и во "pixels" режим) - евтино е
+        # (нема рендерирање), и robustness студијата подоцна ѝ треба на
+        # kinematics-компонентата дури и кога главниот obs_mode е "pixels".
         raw_shape = self.env.observation_space[0].shape
         self.obs_dim = int(np.prod(raw_shape))
+
+        # pixel опсервација - втора, рачно повикувана MultiAgentObservation
+        # инстанца (види class docstring погоре зошто не е дел од
+        # официјалниот gym observation_space). Ја градам само кога реално
+        # ми треба (obs_mode != "kinematics") - секој нејзин .observe()
+        # повик прави вистинско offscreen рендерирање по агент, нема
+        # причина да плаќам за тоа во чистиот kinematics режим.
+        #
+        # pixel_scaling=1.8 (px/метар) - визуелно тестирано (снимав
+        # sample crops со неколку вредности): highway-env default-от 5.5
+        # (за глобалниот 600x600 приказ) е премногу зумиран за мал 64x64
+        # локален кадар - на 64px широчина тоа значи <12m видливо поле,
+        # едвај се гледа сопственото возило. Со scaling=1.8, 64px кадарот
+        # покрива ~35m - доволно да се видат 2-3 најблиски возила И
+        # патните ленти, а сепак возилата остануваат доволно "крупни"
+        # (не само неколку пиксели) за плитката CNN подолу реално да научи
+        # нешто корисно од нив.
+        self._pixel_obs = None
+        self.img_shape = None
+        if obs_mode in ("pixels", "fusion"):
+            pixel_cfg = {
+                "type": "GrayscaleObservation",
+                "observation_shape": pixel_image_size,
+                "stack_size": pixel_stack_size,
+                "weights": pixel_weights or [0.2989, 0.5870, 0.1140],
+                "scaling": pixel_scaling,
+                "centering_position": pixel_centering_position or [0.5, 0.5],
+            }
+            self._pixel_obs = MultiAgentObservation(self.env.unwrapped, pixel_cfg)
+            self.img_shape = (pixel_stack_size, pixel_image_size[0], pixel_image_size[1])
 
     def _flatten(self, obs_tuple):
         # секоја опсервација (matrix vehicles_count x 7) ја "распластувам" во еден вектор
         return [np.asarray(o, dtype=np.float32).flatten() for o in obs_tuple]
+
+    def _build_states(self, kin_list: list[np.ndarray]) -> list:
+        """
+        Го гради конечниот per-agent "state" објект што го гледаат
+        агентите, во зависност од obs_mode:
+          - "kinematics" -> самиот flatten kin вектор (непроменето)
+          - "pixels"     -> само локалната agent-centric сива слика
+          - "fusion"     -> FusionState(kin=..., img=...) - ГИ гледа и двете
+
+        _pixel_obs.observe() го викам тука (по веќе извршениот env
+        reset()/step()), значи гледа точно ист "момент" во симулацијата
+        како kin_list - двете гранки на еден агент секогаш се синхрони.
+        """
+        if self.obs_mode == "kinematics":
+            return kin_list
+        imgs = list(self._pixel_obs.observe())
+        if self.obs_mode == "pixels":
+            return imgs
+        return [FusionState(kin=k, img=i) for k, i in zip(kin_list, imgs)]
 
     def _courtesy_penalty(self, base_env, controlled_vehicle) -> float:
         """
@@ -198,7 +306,7 @@ class MultiAgentIntersectionEnv:
         # во step() подолу зошто ми е ова потребно (поправка на "истечена"
         # награда по пристигнување).
         self._active = [True] * self.num_agents
-        return self._flatten(obs)
+        return self._build_states(self._flatten(obs))
 
     def step(self, actions: list[int]):
         obs, _shared_reward, terminated, truncated, info = self.env.step(tuple(actions))
@@ -241,26 +349,44 @@ class MultiAgentIntersectionEnv:
             "arrived": per_agent_arrived,
             "shared_reward": _shared_reward,  # ја чувам и оригиналната заедничка награда, само за увид/debug
         }
-        return self._flatten(obs), per_agent_rewards, dones, info_out
+        return self._build_states(self._flatten(obs)), per_agent_rewards, dones, info_out
 
     def close(self):
         self.env.close()
 
 
 if __name__ == "__main__":
+    # Кирилски print() на не-UTF8 конзола фрла UnicodeEncodeError - истата
+    # причина како во train.py, види коментар таму.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
+
     # Брз "smoke test" - само неколку случајни чекори за да проверам дека
-    # обвивката воопшто работи, пред да почнам да пишувам код за тренинг.
-    # Секогаш кога ќе го менувам овој фајл, прво го пуштам ова.
-    env = MultiAgentIntersectionEnv(num_agents=3)
-    obs = env.reset(seed=0)
-    print(f"[OK] num_agents={env.num_agents}  obs_dim={env.obs_dim}  num_actions={env.num_actions}")
-    print(f"[OK] obs[0].shape = {obs[0].shape}")
-    total_r = [0.0] * env.num_agents
-    for step in range(15):
-        actions = [np.random.randint(env.num_actions) for _ in range(env.num_agents)]
-        obs, rewards, dones, info = env.step(actions)
-        total_r = [t + r for t, r in zip(total_r, rewards)]
-        if all(dones):
-            break
-    print(f"[OK] завршено по {step + 1} чекори, кумулативни награди: {total_r}")
-    env.close()
+    # обвивката воопшто работи (за СИТЕ 3 obs_mode), пред да почнам да
+    # пишувам код за тренинг. Секогаш кога ќе го менувам овој фајл, прво
+    # го пуштам ова.
+    for obs_mode in OBS_MODES:
+        env = MultiAgentIntersectionEnv(num_agents=3, obs_mode=obs_mode)
+        obs = env.reset(seed=0)
+        print(f"[OK][{obs_mode}] num_agents={env.num_agents}  obs_dim={env.obs_dim}  "
+              f"img_shape={env.img_shape}  num_actions={env.num_actions}")
+        if obs_mode == "kinematics":
+            print(f"[OK][{obs_mode}] obs[0].shape = {obs[0].shape}")
+        elif obs_mode == "pixels":
+            print(f"[OK][{obs_mode}] obs[0].shape = {obs[0].shape}  dtype={obs[0].dtype}  "
+                  f"agent0!=agent1: {not np.array_equal(obs[0], obs[1])}")
+        else:  # fusion
+            print(f"[OK][{obs_mode}] obs[0].kin.shape = {obs[0].kin.shape}  obs[0].img.shape = {obs[0].img.shape}  "
+                  f"agent0!=agent1: {not np.array_equal(obs[0].img, obs[1].img)}")
+        total_r = [0.0] * env.num_agents
+        for step in range(15):
+            actions = [np.random.randint(env.num_actions) for _ in range(env.num_agents)]
+            obs, rewards, dones, info = env.step(actions)
+            total_r = [t + r for t, r in zip(total_r, rewards)]
+            if all(dones):
+                break
+        print(f"[OK][{obs_mode}] завршено по {step + 1} чекори, кумулативни награди: {total_r}")
+        env.close()

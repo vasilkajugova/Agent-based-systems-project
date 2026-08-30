@@ -17,7 +17,9 @@ venv/
 *_history_partial.json
 *_checkpoint_agent*.pt
 
-# сурови runtime-логови од стартување во background (пр. `... *> results/x.log`) -
+# сурови runtime-логови од стартување во background (пр. `... *> results/x.log`,
+# или `... *> results/logs/x.log` за подолгите advanced-студија тренинзи) -
 # самиот текст на логот е само тековен принт-излез, не резултат сам по
 # себе - вистинските резултати секогаш се структурираните *.json фајлови.
 results/*.log
+results/logs/

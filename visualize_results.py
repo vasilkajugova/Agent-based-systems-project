@@ -1,7 +1,7 @@
 """
 Овде ги генерирам публикациски-квалитетните графици за проектниот извештај.
 
-Прави 7 фигури, секоја е замислена да оди директно во извештајот:
+Прави 9 фигури, секоја е замислена да оди директно во извештајот:
   1. training_curves.png        - конвергенција на сите методи (reward/collision/arrival)
   2. method_comparison.png      - групиран bar chart со 95% доверителен интервал
   3. radar_comparison.png       - "spider" дијаграм - нормализирана мулти-метричка споредба
@@ -9,6 +9,8 @@
   5. courtesy_ablation.png      - цена на courtesy_weight (мојот fairness shaping член)
   6. scalability.png            - перформанси по број контролирани возила (2-5 агенти)
   7. hyperparameter_study.png   - one-at-a-time варирање на learning_rate/gamma/epsilon (VDN)
+  8. obs_mode_comparison.png    - advanced студија: Kinematics/Pixels/Fusion × IQL/VDN
+  9. robustness_study.png       - advanced студија: пад на перформанси под шум/blur/darken/branch-dropout
 
 Принципи на кои се држам при секој график (научив дека овие работи се
 важни за читливост во печатен извештај):
@@ -44,6 +46,10 @@ except (AttributeError, ValueError):
 RESULTS_DIR = Path(__file__).parent / "results"
 FIGURES_DIR = RESULTS_DIR / "figures"
 FIGURES_DIR.mkdir(exist_ok=True, parents=True)
+
+# за фигура 9 (robustness) - истиот "кои услови важат за кој obs_mode"
+# речник како во experiments/robustness_study.py, за да не се дуплира тука.
+from experiments.robustness import APPLICABLE_CONDITIONS
 
 # ---------------------------------------------------------------------------
 # Заеднички стил - го применувам на сите фигури во овој фајл, за конзистентност
@@ -545,6 +551,138 @@ def plot_hyperparameter_study():
     return out
 
 
+# ---------------------------------------------------------------------------
+# 8. Observation-mode споредба - advanced дополнителна студија
+#    (Kinematics/Pixels/Fusion × IQL/VDN, experiments/observation_study.py)
+# ---------------------------------------------------------------------------
+OBS_MODE_ORDER = ["kinematics", "pixels", "fusion"]
+OBS_MODE_LABELS = {"kinematics": "Kinematics", "pixels": "Pixels", "fusion": "Fusion"}
+
+
+def plot_obs_mode_comparison():
+    data = _load_json(RESULTS_DIR / "observation_comparison.json")
+    if not data:
+        print("[obs_mode_comparison] Нема observation_comparison.json - прескокнато "
+              "(прво пушти experiments/observation_study.py).")
+        return None
+
+    agg = data["aggregate"]
+    obs_modes = [om for om in OBS_MODE_ORDER if om in agg]
+    methods = [m for m in ("iql", "vdn") if any(m in agg.get(om, {}) for om in obs_modes)]
+
+    panels = [
+        ("reward", "Просечна награда", False),
+        ("collision_rate", "Стапка на судири", True),
+        ("arrival_rate", "Стапка на успех", True),
+        ("avg_steps", "Просечни чекори", False),
+    ]
+
+    fig, axes = plt.subplots(1, 4, figsize=(16, 4.6))
+    bar_width = 0.35
+    x = np.arange(len(obs_modes))
+    for (key, title, is_rate), ax in zip(panels, axes):
+        for j, m in enumerate(methods):
+            means, cis = [], []
+            for om in obs_modes:
+                row = agg.get(om, {}).get(m)
+                means.append(row[key]["mean"] if row else 0.0)
+                cis.append(row[key]["ci95"] if row else 0.0)
+            offset = (j - (len(methods) - 1) / 2) * bar_width
+            ax.bar(x + offset, means, bar_width, yerr=cis, capsize=4,
+                   color=COLORS[m], edgecolor="white", linewidth=1.0, label=LABELS_SHORT[m])
+        ax.set_xticks(x)
+        ax.set_xticklabels([OBS_MODE_LABELS[om] for om in obs_modes])
+        ax.set_title(title)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        if is_rate:
+            ax.yaxis.set_major_formatter(mticker.PercentFormatter(xmax=1.0))
+
+    handles = [Patch(color=COLORS[m], label=LABELS_SHORT[m]) for m in methods]
+    fig.legend(handles=handles, loc="upper center", ncol=len(methods), bbox_to_anchor=(0.5, 1.08))
+    fig.suptitle(
+        "Advanced студија: Kinematics vs Pixels vs Fusion опсервации (IQL/VDN, средина ± 95% CI)",
+        y=1.16, fontsize=13, fontweight="bold",
+    )
+    out = FIGURES_DIR / "obs_mode_comparison.png"
+    fig.savefig(out)
+    plt.close(fig)
+    print(f"[OK] {out}")
+    return out
+
+
+# ---------------------------------------------------------------------------
+# 9. Robustness студија - пад (%) на перформанси под шум/blur/darken/
+#    branch-dropout, наспроти clean евалуација (experiments/robustness_study.py)
+# ---------------------------------------------------------------------------
+CONDITION_LABELS = {
+    "kin_noise": "kin шум",
+    "pixel_blur": "blur",
+    "pixel_dark": "darken",
+    "drop_kin": "drop kin",
+    "drop_img": "drop img",
+}
+
+
+def plot_robustness_study():
+    data = _load_json(RESULTS_DIR / "robustness_study.json")
+    if not data:
+        print("[robustness_study] Нема robustness_study.json - прескокнато "
+              "(прво пушти experiments/robustness_study.py).")
+        return None
+
+    agg = data["aggregate"]
+    methods = ["iql", "vdn"]
+    obs_modes = [om for om in OBS_MODE_ORDER if any(f"{m}/{om}" in agg for m in methods)]
+    if not obs_modes:
+        print("[robustness_study] Нема употребливи податоци во robustness_study.json - прескокнато.")
+        return None
+
+    # позитивно = ПОЛОШО од clean (сметано веќе во robustness_study.py::DIRECTION)
+    metrics = [("mean_reward", "Пад на награда (%)"), ("collision_rate", "Раст на судири (%)")]
+    fig, axes = plt.subplots(len(metrics), len(obs_modes),
+                              figsize=(4.6 * len(obs_modes), 4 * len(metrics)), squeeze=False)
+
+    bar_width = 0.35
+    for row, (metric_key, row_title) in enumerate(metrics):
+        for col, om in enumerate(obs_modes):
+            ax = axes[row][col]
+            conditions = APPLICABLE_CONDITIONS[om]
+            x = np.arange(len(conditions))
+            for j, m in enumerate(methods):
+                by_cond = agg.get(f"{m}/{om}", {})
+                means, cis = [], []
+                for cond in conditions:
+                    entry = by_cond.get(cond)
+                    stats = entry["pct_change_vs_clean"][metric_key] if entry else {"mean": 0.0, "ci95": 0.0}
+                    means.append(stats["mean"])
+                    cis.append(stats["ci95"])
+                offset = (j - (len(methods) - 1) / 2) * bar_width
+                ax.bar(x + offset, means, bar_width, yerr=cis, capsize=3,
+                       color=COLORS[m], edgecolor="white", linewidth=0.8, label=LABELS_SHORT[m])
+            ax.axhline(0, color="#333333", linewidth=0.8)
+            ax.set_xticks(x)
+            ax.set_xticklabels([CONDITION_LABELS.get(c, c) for c in conditions], fontsize=9, rotation=20, ha="right")
+            if col == 0:
+                ax.set_ylabel(row_title)
+            if row == 0:
+                ax.set_title(OBS_MODE_LABELS[om])
+            ax.spines["top"].set_visible(False)
+            ax.spines["right"].set_visible(False)
+
+    handles = [Patch(color=COLORS[m], label=LABELS_SHORT[m]) for m in methods]
+    fig.legend(handles=handles, loc="upper center", ncol=len(methods), bbox_to_anchor=(0.5, 1.04))
+    fig.suptitle(
+        "Robustness студија: пад на перформанси наспроти clean евалуација (позитивно = полошо)",
+        y=1.08, fontsize=13, fontweight="bold",
+    )
+    out = FIGURES_DIR / "robustness_study.png"
+    fig.savefig(out)
+    plt.close(fig)
+    print(f"[OK] {out}")
+    return out
+
+
 if __name__ == "__main__":
     print("Генерирам публикациски-квалитетни фигури во results/figures/ ...\n")
     plot_training_curves()
@@ -554,4 +692,6 @@ if __name__ == "__main__":
     plot_courtesy_ablation()
     plot_scalability()
     plot_hyperparameter_study()
+    plot_obs_mode_comparison()
+    plot_robustness_study()
     print("\nГотово.")

@@ -33,14 +33,14 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from agents.networks import QNetwork, DuelingQNetwork, MultiAgentReplayBuffer
+from agents.networks import MultiAgentReplayBuffer, build_q_network, forward_q, to_batch_tensor, to_torch
 
 
 class VDNAgent:
     def __init__(
         self,
         num_agents: int,
-        obs_dim: int,
+        obs_dim: int | None,
         num_actions: int,
         learning_rate: float = 1e-3,
         discount_factor: float = 0.95,
@@ -49,19 +49,29 @@ class VDNAgent:
         dueling: bool = False,
         hidden: int = 128,
         device: str | None = None,
+        obs_mode: str = "kinematics",
+        img_shape: tuple[int, int, int] | None = None,
     ):
+        # obs_mode/img_shape - исто како во dqn_agent.py: default вредности
+        # ("kinematics", None) точно го репродуцираат старото однесување.
         self.num_agents = num_agents
         self.obs_dim = obs_dim
         self.num_actions = num_actions
         self.gamma = discount_factor
         self.batch_size = batch_size
+        self.obs_mode = obs_mode
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
 
-        net_cls = DuelingQNetwork if dueling else QNetwork
         # секој агент си има своја одделна мрежа (тежините НЕ се
         # споделени), но сите заедно се тренираат преку сумираната TD-цел подолу
-        self.models = [net_cls(obs_dim, num_actions, hidden).to(self.device) for _ in range(num_agents)]
-        self.target_models = [net_cls(obs_dim, num_actions, hidden).to(self.device) for _ in range(num_agents)]
+        self.models = [
+            build_q_network(obs_mode, obs_dim, img_shape, num_actions, dueling, hidden).to(self.device)
+            for _ in range(num_agents)
+        ]
+        self.target_models = [
+            build_q_network(obs_mode, obs_dim, img_shape, num_actions, dueling, hidden).to(self.device)
+            for _ in range(num_agents)
+        ]
         self.update_target_model()
 
         # еден единствен optimizer за СИТЕ агентски мрежи заедно - бидејќи
@@ -82,17 +92,19 @@ class VDNAgent:
     def update_memory(self, states, actions, rewards, next_states, dones):
         self.memory.push(states, actions, rewards, next_states, dones)
 
-    def get_actions(self, states: list[np.ndarray], epsilon: float) -> list[int]:
+    def get_actions(self, states: list, epsilon: float) -> list[int]:
         # секој агент одлучува ЗАСЕБНО, само врз основа на сопствената
-        # опсервација - ова е decentralized execution делот од CTDE
+        # опсервација - ова е decentralized execution делот од CTDE.
+        # state е numpy вектор/слика или FusionState(kin,img) - to_batch_tensor/
+        # forward_q (agents/networks.py) го крие тоа разликување тука.
         actions = []
         for i, state in enumerate(states):
             if np.random.rand() < epsilon:
                 actions.append(np.random.randint(self.num_actions))
             else:
-                state_t = torch.tensor(state, dtype=torch.float32, device=self.device).unsqueeze(0)
+                state_t = to_batch_tensor(state, self.device)
                 with torch.no_grad():
-                    q = self.models[i](state_t)
+                    q = forward_q(self.models[i], state_t)
                 actions.append(int(torch.argmax(q, dim=1).item()))
         return actions
 
@@ -105,14 +117,19 @@ class VDNAgent:
         target_tot = torch.zeros(self.batch_size, device=self.device)
 
         for i in range(self.num_agents):
-            states = torch.tensor(batch["states"][i], dtype=torch.float32, device=self.device)
+            # batch["states"][i]/["next_states"][i] веќе се стакувани преку
+            # stack_states() внатре во MultiAgentReplayBuffer.sample()
+            # (agents/networks.py) - to_torch() тука само ги конвертира во
+            # torch тензор(и) (FusionState -> FusionState од тензори за
+            # fusion режим, обичен тензор инаку).
+            states = to_torch(batch["states"][i], self.device)
             actions = torch.tensor(batch["actions"][i], dtype=torch.long, device=self.device).unsqueeze(1)
-            next_states = torch.tensor(batch["next_states"][i], dtype=torch.float32, device=self.device)
+            next_states = to_torch(batch["next_states"][i], self.device)
             rewards_i = torch.tensor(batch["rewards"][i], dtype=torch.float32, device=self.device)
             dones_i = torch.tensor(batch["dones"][i], dtype=torch.float32, device=self.device)
 
             # Q_i(o_i, a_i) за агент i, па го собирам во заедничкиот Q_tot (централизирано тренирање)
-            q_i = self.models[i](states).gather(1, actions).squeeze(1)
+            q_i = forward_q(self.models[i], states).gather(1, actions).squeeze(1)
             q_tot = q_tot + q_i
 
             # ВАЖЕН детаљ на кој наидов при тестирање, па сакам добро да го
@@ -132,7 +149,7 @@ class VDNAgent:
             # стандардната VDN декомпозиција:
             #     Q_tot(target) = Σ_i [ r_i + gamma * Q_i'(next) * (1 - done_i) ]
             with torch.no_grad():
-                next_q_i = self.target_models[i](next_states).max(dim=1).values
+                next_q_i = forward_q(self.target_models[i], next_states).max(dim=1).values
                 target_i = rewards_i + self.gamma * next_q_i * (1 - dones_i)
             target_tot = target_tot + target_i
 
@@ -154,5 +171,6 @@ class VDNAgent:
 
     def load(self, path_prefix: str):
         for i, m in enumerate(self.models):
-            m.load_state_dict(torch.load(f"{path_prefix}_agent{i}.pt", map_location=self.device))
+            # weights_only=True - истата причина како во dqn_agent.py::load()
+            m.load_state_dict(torch.load(f"{path_prefix}_agent{i}.pt", map_location=self.device, weights_only=True))
         self.update_target_model()
