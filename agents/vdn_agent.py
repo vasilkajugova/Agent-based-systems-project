@@ -46,6 +46,7 @@ class VDNAgent:
         discount_factor: float = 0.95,
         batch_size: int = 64,
         buffer_size: int = 50_000,
+        double_dqn: bool = False,
         dueling: bool = False,
         hidden: int = 128,
         device: str | None = None,
@@ -54,11 +55,29 @@ class VDNAgent:
     ):
         # obs_mode/img_shape - исто како во dqn_agent.py: default вредности
         # ("kinematics", None) точно го репродуцираат старото однесување.
+        #
+        # double_dqn (додадено при ревизија на проектот): ДОСЕГА VDNAgent
+        # немаше опција воопшто - секогаш користеше "обичен" DQN target
+        # (max_a Q_target(s',a)), додека IQL (agents/dqn_agent.py, преку
+        # train.py::make_manager) секогаш се тренира со double_dqn=True.
+        # Тоа значи главната IQL-vs-VDN споредба во проектот незабележано
+        # варираше ДВА фактори одеднаш (mixing-стратегија VDN/IQL, И
+        # target-методот double-DQN/обичен DQN), не само она што
+        # истражувачкото прашање тврди дека го тестира (CTDE наспроти
+        # независно учење - IQL има и dueling=False наспроти VDN
+        # dueling=True, истиот проблем). default=False овде НАМЕРНО ги
+        # чува веќе-истренираните модели/резултати во results/ важечки
+        # (истиот target-метод како порано) - double_dqn=True е достапно
+        # само кога експлицитно се бара (види
+        # experiments/confound_check_study.py), за контролирана споредба
+        # каде double_dqn/dueling се ИСТИ и за VDN и за IQL, а се разликува
+        # само CTDE-делот.
         self.num_agents = num_agents
         self.obs_dim = obs_dim
         self.num_actions = num_actions
         self.gamma = discount_factor
         self.batch_size = batch_size
+        self.double_dqn = double_dqn
         self.obs_mode = obs_mode
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -149,7 +168,17 @@ class VDNAgent:
             # стандардната VDN декомпозиција:
             #     Q_tot(target) = Σ_i [ r_i + gamma * Q_i'(next) * (1 - done_i) ]
             with torch.no_grad():
-                next_q_i = forward_q(self.target_models[i], next_states).max(dim=1).values
+                if self.double_dqn:
+                    # Double DQN трик (истата логика како
+                    # DQNAgent.train_step() во dqn_agent.py): online мрежата
+                    # НА АГЕНТ i ја бира најдобрата следна акција, target
+                    # мрежата НА ИСТИОТ агент само ја оценува - секој агент
+                    # го прави ова ЗАСЕБНО (нема "заедничко" бирање акции
+                    # низ агентите, секој Q_i останува декентрализиран).
+                    next_actions_i = forward_q(self.models[i], next_states).argmax(dim=1, keepdim=True)
+                    next_q_i = forward_q(self.target_models[i], next_states).gather(1, next_actions_i).squeeze(1)
+                else:
+                    next_q_i = forward_q(self.target_models[i], next_states).max(dim=1).values
                 target_i = rewards_i + self.gamma * next_q_i * (1 - dones_i)
             target_tot = target_tot + target_i
 

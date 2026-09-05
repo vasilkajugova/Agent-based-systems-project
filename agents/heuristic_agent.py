@@ -59,7 +59,7 @@ class HeuristicAgent:
         return self.ACTIONS["FASTER"]
 
     def get_actions(self, states: list[np.ndarray], epsilon: float = 0.0) -> list[int]:
-        # epsilon се игнорира тука - ова е детерминистичко правило, нема
+        # epsilon се игнорира тука, ова е детерминистичко правило, нема
         # учење, значи нема потреба од epsilon-greedy истражување. Го
         # задржувам параметарот само за да може да се повикува со ист
         # интерфејс како IQL/VDN агентите во train.py/evaluate.py.

@@ -1,0 +1,50 @@
+{
+  "alpha": 0.05,
+  "source": "C:\\Users\\vasil\\OneDrive\\Desktop\\Agentbasedsystemsprojectfinal\\results\\confound_check_summary.json",
+  "results": [
+    {
+      "a": "iql_dueling",
+      "b": "vdn",
+      "metric": "mean_reward",
+      "mean_a": 5.8877576054142375,
+      "mean_b": 5.672826517679416,
+      "t": 0.9253257043841895,
+      "df": 7.262633672335073,
+      "p": 0.38451221556798226,
+      "significant": false
+    },
+    {
+      "a": "iql_dueling",
+      "b": "vdn",
+      "metric": "collision_rate",
+      "mean_a": 0.588,
+      "mean_b": 0.5346666666666666,
+      "t": 2.2555354977384034,
+      "df": 4.940371425984836,
+      "p": 0.07440508302995542,
+      "significant": false
+    },
+    {
+      "a": "iql_dueling",
+      "b": "vdn",
+      "metric": "arrival_rate",
+      "mean_a": 0.48888888888888893,
+      "mean_b": 0.4528888888888889,
+      "t": 1.278566688475043,
+      "df": 5.942645295293409,
+      "p": 0.2487101230204379,
+      "significant": false
+    },
+    {
+      "a": "iql_dueling",
+      "b": "vdn",
+      "metric": "avg_steps",
+      "mean_a": 8.229333333333333,
+      "mean_b": 10.116,
+      "t": -4.177869338858018,
+      "df": 5.492015196805287,
+      "p": 0.007073161390563447,
+      "significant": true
+    }
+  ]
+}
