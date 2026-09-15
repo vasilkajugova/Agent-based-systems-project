@@ -215,7 +215,15 @@ Under `kin_noise`/`drop_kin`, plain Fusion loses 5-24% arrival_rate
 Fusion, arrival_rate under the same two conditions **does not drop** -
 on average it actually RISES relative to its own (lower) clean baseline
 (IQL: +66% under `kin_noise`, +212% under `drop_kin`; VDN: +2% / +24%;
-high seed-to-seed variance, especially for IQL).
+high seed-to-seed variance, especially for IQL). **Reproducibility
+note**: these specific percentages are from an earlier one-off run -
+`experiments/robustness_study.py --obs_modes` currently only accepts
+`kinematics`/`pixels`/`fusion` (not `fusion_fixed` models), so the
+repository's `results/robustness_study.json` does not currently contain
+`fusion_fixed` rows to verify these numbers against directly; either the
+script should be extended to support `fusion_fixed`, or these figures
+should be explicitly marked as historical/not reproducible from the
+current code.
 
 Conclusion: the fix genuinely forces the network to use the image for
 most (not all) agent×seed combinations - img_sens rises by ~2-3 orders
