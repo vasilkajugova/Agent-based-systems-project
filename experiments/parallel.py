@@ -33,7 +33,7 @@
     results = run_jobs(my_job_function, list_of_job_args, max_workers=8)
     # my_job_function мора да е "top-level" функција (не lambda/closure) -
     # multiprocessing на Windows користи "spawn", кое бара job функцијата
-    # и нејзините аргументи да можат да се "pickle"-аат (сериjaлизираат).
+    # и нејзините аргументи да можат да се "pickle"-аат (сериjализираат).
 """
 from __future__ import annotations
 
@@ -84,11 +84,10 @@ def _init_worker():
     # Кирилски print() на не-UTF8 конзола фрла UnicodeEncodeError (истата
     # причина како во train.py, види коментар таму) - ВАЖНО е ова да се
     # постави тука, во самиот worker, не само во родителскиот процес:
-    # secondmultiprocessing на Windows користи "spawn", секој worker
-    # процес добива СОПСТВЕН sys.stdout со сопствен encoding, независен од
-    # родителот (multiprocessing на Windows користи "spawn"). Затоа
-    # reconfigure() во run_comparison.py/итн. не важи автоматски и за
-    # worker-ите - мора одделно тука.
+    # multiprocessing на Windows користи "spawn", секој worker процес
+    # добива СОПСТВЕН sys.stdout со сопствен encoding, независен од
+    # родителот. Затоа reconfigure() во run_comparison.py/итн. не важи
+    # автоматски и за worker-ите - мора одделно тука.
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")

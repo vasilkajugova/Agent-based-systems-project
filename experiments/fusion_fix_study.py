@@ -17,8 +17,9 @@
 
 Брз (800 епизоди, 1 seed) дијагностички тест веќе покажа дека двете
 заедно даваат далеку најдобар резултат (img_sens ~0.0002->1.0+, види
-разговорот/тезата) - ова е целосниот run (исти episode/seed бројки како
-observation_study.py) за финални, репортабилни бројки.
+README.md - секцијата "Modality collapse" - за конечните бројки) - ова
+е целосниот run (исти episode/seed бројки како observation_study.py) за
+финални, репортабилни бројки.
 
 Употреба:
     python experiments/fusion_fix_study.py --episodes 2000 --eval_episodes 200 --seeds 0 1 2 3 4 --workers 8
@@ -51,7 +52,7 @@ METHODS = ["iql", "vdn"]
 MODALITY_DROPOUT_PROB = 0.3
 # Иста RAM причина како во experiments/observation_study.py::PIXEL_BUFFER_SIZE
 # (Fusion states секогаш носат слика - replay buffer со default 50_000
-# capacity лесно бара неколку GB по paralelen worker процес).
+# capacity лесно бара неколку GB по паралелен worker процес).
 PIXEL_BUFFER_SIZE = 20_000
 
 

@@ -305,7 +305,7 @@ def main():
 
         print(f"[watch] снимам епизода (seed={seed}) ...")
         frames = run_episode(panels, seed=seed, max_steps=args.max_steps)
-        print(f"[watch] {len(frames)} фрејмови composed.")
+        print(f"[watch] {len(frames)} фрејмови составени.")
 
         if args.live:
             print("[watch] отворам live прозорец (затвори го прозорецот или почекај да заврши) ...")

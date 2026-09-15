@@ -50,7 +50,7 @@ def _run_one_job(job):
     # (не внатре во main()) - multiprocessing на Windows користи "spawn",
     # кое секој worker процес го стартува со НОВ Python интерпретер и мора
     # да може да ја "увезе" (import) оваа функција по име, не само да ја
-    # добие preко затворена променлива (closure).
+    # добие преку затворена променлива (closure).
     method, seed, episodes, eval_episodes, num_agents = job
 
     if method != "heuristic":

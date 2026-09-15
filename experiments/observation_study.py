@@ -54,7 +54,7 @@ NEW_OBS_MODES = ["pixels", "fusion"]  # "kinematics" веќе постои (run_
 # СУРОВИ np.ndarray state-објекти - за kinematics тоа е ~168 бајти по
 # опсервација (42 float32), но за pixels/fusion секоја слика е
 # stack_size×H×W = 4×64×64 = 16 384 бајти (uint8), ~100x поголемо. На
-# capacity=50_000 тоа значи неколку GB RAM ПО paralelen worker процес
+# capacity=50_000 тоа значи неколку GB RAM ПО паралелен worker процес
 # (state + next_state, ×num_agents за VDN) - со 14 паралелни job-ови
 # (experiments/parallel.py::default_worker_count() на 16-јадрена машина)
 # тоа лесно ја надминува вкупната RAM на машината (проверено: 31 GB

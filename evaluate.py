@@ -88,7 +88,7 @@ def evaluate(method: str, model_prefix: str | None, num_agents: int = 3, episode
     (шум/blur/darken/branch-dropout) без да ја дуплира целата eval-логика
     тука - самиот модел е ВЕЌЕ истрениран на чисти опсервации (тренингот
     воопшто не знае за perturb_fn), значи ова е чисто eval-time
-    манипулација, не дел од МDP-то со кое агентот учел.
+    манипулација, не дел од MDP-то со кое агентот учел.
     """
     env = MultiAgentIntersectionEnv(num_agents=num_agents, obs_mode=obs_mode)
     try:

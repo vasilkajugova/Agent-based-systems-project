@@ -10,9 +10,9 @@ Q-мрежа (со опционален dueling "head"), и replay buffer (ме�
 
 Проширување за 3-те observation режими (Kinematics / Pixels / Fusion):
 опсервацијата по агент е СЕГА или обичен numpy вектор (kinematics/pixels
-режим), или `FusionState(kin, img)` (fusion режим - двa одделни "гранки").
+режим), или `FusionState(kin, img)` (fusion режим - два одделни "гранки").
 Наместо да го "растурам" ова obs_mode-разликување низ секој агент
-(dqn_agent.py, vdn_agent.py) одделно, го centraliziram тука преку неколку
+(dqn_agent.py, vdn_agent.py) одделно, го централизирам тука преку неколку
 мали helper функции (`stack_states`, `to_torch`, `to_batch_tensor`,
 `forward_q`) - секој агент само ги повикува нив, без сам да мора да знае
 "дали ова е FusionState или обичен тензор". Единственото место кое РЕАЛНО
@@ -300,7 +300,7 @@ def forward_q(model: nn.Module, state_t) -> torch.Tensor:
 
 def drop_branch(state: FusionState, which: str) -> FusionState:
     """
-    За Fusion опсервација, ја "гаси" (нулира) едната гранка. Двe одделни
+    За Fusion опсервација, ја "гаси" (нулира) едната гранка. Две одделни
     употреби во проектот:
       1. Eval-time robustness perturbation (experiments/robustness.py) -
          симулира привремен дефект на еден сензор.

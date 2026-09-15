@@ -205,7 +205,7 @@ def _load_pretrained_img_branch(manager, method: str, pretrained_prefix: str, de
     натпреварува" со веќе-корисната kinematics-гранка од нула.
 
     `_CNNEncoder` архитектурата е ИДЕНТИЧНА помеѓу PixelQNetwork.encoder и
-    FusionQNetwork.img_branch (агents/networks.py, исти конструкторски
+    FusionQNetwork.img_branch (agents/networks.py, исти конструкторски
     аргументи) - затоа state_dict-от директно се совпаѓа откако ќе го
     "отсечам" "encoder." префиксот од клучевите.
     """
